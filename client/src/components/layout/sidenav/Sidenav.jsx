@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import { Link } from 'react-router-dom';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 const Sidenav = () => {
@@ -17,35 +18,56 @@ const Sidenav = () => {
 
   return (
     <SideNav style={{ top: 80, justifyContent: 'center' }}>
-      <SideNav.Toggle style={{ fontSize: '1.75em', marginBottom: 20 }} />
+      <SideNav.Toggle style={{ marginBottom: 30 }} />
+
       <SideNav.Nav defaultSelected="companies">
-        <NavItem eventKey="companies" style={{ marginBottom: 40 }}>
-          <NavIcon>
-            <i className="fas fa-hotel" style={{ fontSize: '1.75em' }} />
-          </NavIcon>
-          <NavText style={{ fontSize: '1.75em' }}>Companies</NavText>
-        </NavItem>
-        <NavItem eventKey="buildings" style={{ marginBottom: 40 }}>
-          <NavIcon>
-            <i className="far fa-building" style={{ fontSize: '1.75em' }} />
-          </NavIcon>
-          <NavText style={{ fontSize: '1.75em' }}>Buildings</NavText>
-        </NavItem>
-        <NavItem eventKey="boilers" style={{ marginBottom: 40 }}>
-          <NavIcon>
-            <i
-              className="fas fa-temperature-high"
-              style={{ fontSize: '1.75em' }}
-            />
-          </NavIcon>
-          <NavText style={{ fontSize: '1.75em' }}>Boilers</NavText>
-        </NavItem>
-        <NavItem eventKey="technicians" style={{ marginBottom: 150 }}>
-          <NavIcon>
-            <i className="fas fa-hard-hat" style={{ fontSize: '1.75em' }} />
-          </NavIcon>
-          <NavText style={{ fontSize: '1.75em' }}>Technicians</NavText>
-        </NavItem>
+        <Link
+          to="/companies"
+          style={{ textDecoration: 'none', color: '#f8f8f8' }}
+        >
+          <NavItem eventKey="companies" style={{ marginBottom: 40 }}>
+            <NavIcon>
+              <i className="fas fa-hotel" style={{ fontSize: '26px' }} />
+            </NavIcon>
+            <NavText style={{ fontSize: '18px' }}>Companies</NavText>
+          </NavItem>
+        </Link>
+        <Link
+          to="/buildings"
+          style={{ textDecoration: 'none', color: '#f8f8f8' }}
+        >
+          <NavItem eventKey="buildings" style={{ marginBottom: 40 }}>
+            <NavIcon>
+              <i className="far fa-building" style={{ fontSize: '26px' }} />
+            </NavIcon>
+            <NavText style={{ fontSize: '18px' }}>Buildings</NavText>
+          </NavItem>
+        </Link>
+        <Link
+          to="/boilers"
+          style={{ textDecoration: 'none', color: '#f8f8f8' }}
+        >
+          <NavItem eventKey="boilers" style={{ marginBottom: 40 }}>
+            <NavIcon>
+              <i
+                className="fas fa-temperature-high"
+                style={{ fontSize: '26px' }}
+              />
+            </NavIcon>
+            <NavText style={{ fontSize: '18px' }}>Boilers</NavText>
+          </NavItem>
+        </Link>
+        <Link
+          to="/technicians"
+          style={{ textDecoration: 'none', color: '#f8f8f8' }}
+        >
+          <NavItem eventKey="technicians" style={{ marginBottom: 150 }}>
+            <NavIcon>
+              <i className="fas fa-hard-hat" style={{ fontSize: '26px' }} />
+            </NavIcon>
+            <NavText style={{ fontSize: '18px' }}>Technicians</NavText>
+          </NavItem>
+        </Link>
         <NavItem>
           <NavText style={{ textAlign: 'center' }}>
             <p>{date}</p>
