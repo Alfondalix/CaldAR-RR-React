@@ -1,8 +1,10 @@
 * {
   box-sizing: border-box;
 }
-
-h1 {
-  font-size: 40px;
+.App {
   text-align: center;
+}
+
+Link {
+  color: #f8f8f8 !important;
 }
