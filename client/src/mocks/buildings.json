@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "address": "5108 Marcy Parkway",
+    "boilers": [875, 22],
+    "fullName": "Rhynyx",
+    "phoneNumber": "584-119-5646"
+  }, 
+  {
+    "id": 2,
+    "address": "54204 Ridge Oak Place",
+    "boilers": [12, 56],
+    "fullName": "Skalith",
+    "phoneNumber": "888-139-7003"
+  }, 
+  {
+    "id": 3,
+    "address": "16 Kinsman Place",
+    "boilers": [58, 4],
+    "fullName": "Demizz",
+    "phoneNumber": "413-536-2546"
+  }, 
+  {
+    "id": 4,
+    "address": "99158 Corscot Alley",
+    "boilers": [20, 47],
+    "fullName": "Tagtune",
+    "phoneNumber": "288-690-2693"
+  },
+  {
+    "id": 5,
+    "address": "561 Marquette Lane",
+    "boilers": [30, 11],
+    "fullName": "Pixoboo",
+    "phoneNumber": "276-365-3239"
+  }, 
+  {
+    "id": 6,
+    "address": "7174 Maywood Avenue",
+    "boilers": [33, 69],
+    "fullName": "Oyondu",
+    "phoneNumber": "618-961-2753"
+  }, 
+  {
+    "id": 7,
+    "address": "34838 Burrows Lane",
+    "boilers": [99, 98],
+    "fullName": "Jetwire",
+    "phoneNumber": "706-375-6805"
+  }
+]
