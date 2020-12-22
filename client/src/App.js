@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from '@material-ui/core/Modal';
 import './App.css';
 import Header from './components/layout/header/Header';
 import Sidenav from './components/layout/sidenav/Sidenav';
