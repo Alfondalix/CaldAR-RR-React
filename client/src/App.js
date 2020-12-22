@@ -6,6 +6,7 @@ import Buildings from './components/pages/buildings/Buildings.jsx';
 import Companies from './components/pages/Companies';
 import Boilers from './components/pages/Boilers';
 import Technicians from './components/pages/Technicians';
+import BoilerTypes from './components/pages/Boiler-types/Boiler-types';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/buildings" exact component={Buildings} />
             <Route path="/boilers" exact component={Boilers} />
             <Route path="/technicians" exact component={Technicians} />
+            <Route path="/boiler-types" exact component={BoilerTypes} />
           </Switch>
         </div>
       </Router>

@@ -58,10 +58,21 @@ const Sidenav = () => {
           </NavItem>
         </Link>
         <Link
+          to="/boiler-types"
+          style={{ textDecoration: 'none', color: '#f8f8f8' }}
+        >
+          <NavItem eventKey="boiler-types" style={{ marginBottom: 40 }}>
+            <NavIcon>
+              <i className="fas fa-hotel" style={{ fontSize: '26px' }} />
+            </NavIcon>
+            <NavText style={{ fontSize: '18px' }}>Boiler Types</NavText>
+          </NavItem>
+        </Link>
+        <Link
           to="/technicians"
           style={{ textDecoration: 'none', color: '#f8f8f8' }}
         >
-          <NavItem eventKey="technicians" style={{ marginBottom: 150 }}>
+          <NavItem eventKey="technicians" style={{ marginBottom: 100 }}>
             <NavIcon>
               <i className="fas fa-hard-hat" style={{ fontSize: '26px' }} />
             </NavIcon>
