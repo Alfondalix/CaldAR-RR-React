@@ -1,0 +1,6 @@
+.list {
+    display: flex;
+    justify-content: center;
+    color: red;
+    padding: 50px;
+}
