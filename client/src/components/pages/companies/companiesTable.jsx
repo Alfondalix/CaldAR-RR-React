@@ -15,7 +15,7 @@ import AddCompany from './addCompany';
 import styles from './companiesTable.module.css';
 
 const CompaniesTable = (props) => {
-  
+
   return (
     <TableContainer className={styles.container} component={Paper}>
       <Table className={styles.table} size="small" aria-label="a dense table">

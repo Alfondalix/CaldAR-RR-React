@@ -7,7 +7,7 @@ import AddCompany from './addCompany';
 
 
 const Companies = () => {
-  
+
   const initialCompany = {
     id: null,
     name: '',
@@ -17,10 +17,10 @@ const Companies = () => {
   };
 
   const [company, setCompany] = useState(companies);
-  
+
   // ADD COMPANY
   const addCompany = (company) => {
-    company.id = company.length + 1;
+    company.id = Math.round(Math.random() * 100);
     setCompany([...companies, company]);
   };
 
@@ -30,7 +30,7 @@ const Companies = () => {
     setCompany(companiesFilter);
     console.log('eliminado');
   }
-  
+
   return (
     <div className={styles.container} >
       {/* <h1>Companies Page</h1> */}

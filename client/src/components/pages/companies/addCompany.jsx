@@ -19,22 +19,26 @@ const AddCompany = (props) => {
   const [company, setCompany] = useState(newCompany);
   const [open, setOpen] = useState(false);
 
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setCompany({...company, [name]: value});
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCompany({ ...company, [name]: value });
+  };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (company.name && company.email && company.address && company.buildings  ) {
-       handleChange(e, props.addCompany(company));
+    if (
+      company.name &&
+      company.email &&
+      company.address &&
+      company.buildings
+    ) {
+      handleChange(e, props.addCompany(company));
     }
     setOpen(false);
   };
 
   const handleOpen = () => {
     setOpen(true);
-    console.log('HANDLEOPEN');
   };
 
   const handleClose = () => {
@@ -46,7 +50,7 @@ const AddCompany = (props) => {
       <Button variant="contained" 
                 color="primary"
                 onClick={handleOpen}
-                >
+                > New Company
                   <AddBoxIcon />
       </Button>
       <Modal 
@@ -54,10 +58,10 @@ const AddCompany = (props) => {
       onClose={handleClose}
       >
         <form className={styles.formModal} >
-        <TextField id="outlined-basic" label="NAME" variant="outlined" onChange={handleChange} value={company.name} name="name" />
-        <TextField id="outlined-basic" label="EMAIL" variant="outlined" onChange={handleChange} value={company.email} name="email" />
-        <TextField id="outlined-basic" label="ADDRESS" variant="outlined" onChange={handleChange} value={company.address} name="address" />
-        <TextField id="outlined-basic" label="BUILDINGS" variant="outlined" onChange={handleChange} value={company.buildings} name="buildings" />
+        <TextField id="outlined-basic" label="NAME" variant="outlined" onChange={handleChange}  name="name" />
+        <TextField id="outlined-basic" label="EMAIL" variant="outlined" onChange={handleChange}  name="email" />
+        <TextField id="outlined-basic" label="ADDRESS" variant="outlined" onChange={handleChange}  name="address" />
+        <TextField id="outlined-basic" label="BUILDINGS" variant="outlined" onChange={handleChange}  name="buildings" />
         <div>
         <Button onClick={handleSubmit} >
           <CheckCircleIcon />
