@@ -1,35 +1,37 @@
-[{
-  "id": 1,
-  "name": "Catapult Studio",
-  "buildings": ["10-147", "10-258"],
-  "email": "catapultstudio@mail.com",
-  "adress": "Cortada 142"
-},
-{
-  "id": 2,
-  "name": "Builder Studio",
-  "buildings": ["20-147", "20-258", "20-369", "20-452", "20-789"],
-  "email": "builderstudio@mail.com",
-  "adress": "Villa 456"
-},
-{
-  "id": 3,
-  "name": "Buildings Den",
-  "buildings": ["30-147", "30-258", "30-369", "30-415"],
-  "email": "denbuildings@mail.com",
-  "adress": "Calle 564"
-},
-{
-  "id": 4,
-  "name": "Uplift Studio",
-  "buildings": ["40-147", "40-258", "40-369", "40-524", "40-412", "40-413"],
-  "email": "uplift@mail.com",
-  "adress": "Boulevard 415"
-},
-{
-  "id": 5,
-  "name": "Solar Studio",
-  "buildings": ["50-147"],
-  "email": "solar@mail.com",
-  "adress": "Avenida 756"
-}]
+[
+  {
+    "id": 1,
+    "name": "Builder Studio",
+    "email": "builder@studio.com",
+    "address": "Villa 890",
+    "buildgins": [875, 22]
+  }, 
+  {
+    "id": 2,
+    "name": "Builder Studio",
+    "email": "builder@studio.com",
+    "address": "Villa 890",
+    "buildgins": [875, 22]
+  },
+  {
+    "id": 3,
+    "name": "Builder Studio",
+    "email": "builder@studio.com",
+    "address": "Villa 890",
+    "buildgins": [875, 22]
+  },
+  {
+    "id": 4,
+    "name": "Builder Studio",
+    "email": "builder@studio.com",
+    "address": "Villa 890",
+    "buildgins": [875, 22]
+  },
+  {
+    "id": 5,
+    "name": "Builder Studio",
+    "email": "builder@studio.com",
+    "address": "Villa 890",
+    "buildgins": [875, 22]
+  }
+]
