@@ -3,6 +3,7 @@ import buildings from './buildings.json';
 import BuildingTable from './BuildingTable';
 import AddBuilding from './AddBuilding';
 import EditBuilding from './EditBuilding';
+import './Buildings.css';
 
 const Buildings = () => {
   const initialBuilding = {
@@ -16,12 +17,6 @@ const Buildings = () => {
   const [building, setBuilding] = useState(buildings);
   const [edit, setEdit] = useState(false);
   const [currentBuilding, setCurrentBuilding] = useState(initialBuilding);
-
-  // ADD Building
-  const addBuilding = (building) => {
-    building.id = buildings.length + 1;
-    setBuilding([...buildings, building]);
-  };
 
   // EDIT Building
   const editBuilding = (id, building) => {
@@ -37,13 +32,24 @@ const Buildings = () => {
     setEdit(false);
   };
 
+  // ADD Building
+  const addBuilding = (newbuilding) => {
+    newbuilding.id = building.length + 1;
+    setBuilding([...building, newbuilding]);
+    console.log(newbuilding);
+  };
+
   //DELETE Building
   const deleteBuilding = (id) =>
-    setBuilding(building.filter((user) => user.id !== id));
+    setBuilding(building.filter((building) => building.id !== id));
 
   return (
-    <div>
-      <h1>Buildings</h1>
+    <div className="buildings-div">
+      <BuildingTable
+        building={building}
+        deleteBuilding={deleteBuilding}
+        editBuilding={editBuilding}
+      />
       {edit ? (
         <div>
           <EditBuilding
@@ -57,11 +63,6 @@ const Buildings = () => {
           <AddBuilding addBuilding={addBuilding} />
         </div>
       )}
-      <BuildingTable
-        building={building}
-        deleteBuilding={deleteBuilding}
-        editBuilding={editBuilding}
-      />
     </div>
   );
 };

@@ -44,6 +44,27 @@
   {
     "id": 7,
     "address": "34838 Burrows Lane",
+    "boilers": [998, 198],
+    "fullName": "Jetwire",
+    "phoneNumber": "706-375-6805"
+  },
+  {
+    "id": 8,
+    "address": "34838 Burrows Lane",
+    "boilers": [799, 88],
+    "fullName": "Jetwire",
+    "phoneNumber": "706-375-6805"
+  },
+  {
+    "id": 9,
+    "address": "34838 Burrows Lane",
+    "boilers": [99, 98],
+    "fullName": "Jetwire",
+    "phoneNumber": "706-375-6805"
+  },
+  {
+    "id": 10,
+    "address": "34838 Burrows Lane",
     "boilers": [99, 98],
     "fullName": "Jetwire",
     "phoneNumber": "706-375-6805"

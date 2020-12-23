@@ -1,0 +1,52 @@
+.table-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  font-size: 25px;
+  height: auto;
+  margin-bottom: 40px;
+  margin-top: 80px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+.table-container thead {
+  background-color: gray;
+  color: #f8f8f8;
+}
+
+.table-titles th {
+  padding: 10px;
+}
+
+.table-container tbody td {
+  margin: 20px;
+}
+
+.btn-edi,
+.btn-del {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #174157;
+}
+
+.add-btn {
+  background-color: transparent;
+  color: #174157;
+  font-size: 40px;
+  border-radius: 50%;
+  border: none;
+}
+
+.btn-del:hover,
+.btn-edi:hover {
+  color: gray;
+  cursor: pointer;
+}
