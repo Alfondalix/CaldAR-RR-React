@@ -7,11 +7,6 @@ import Companies from './components/pages/Companies';
 import Boilers from './components/pages/Boilers';
 import Technicians from './components/pages/Technicians';
 import BoilerTypes from './components/pages/Boiler-types/BoilerTypes.jsx';
-
-
-
-
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
