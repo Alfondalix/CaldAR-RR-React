@@ -1,37 +1,37 @@
 [
   {
-    "id": 1,
+    "id": 14536,
     "name": "Builder Studio",
     "email": "builder@studio.com",
     "address": "Villa 890",
-    "buildgins": [875, 22]
-  }, 
-  {
-    "id": 2,
-    "name": "Builder Studio",
-    "email": "builder@studio.com",
-    "address": "Villa 890",
-    "buildgins": [875, 22]
+    "buildings": [875, 22]
   },
   {
-    "id": 3,
-    "name": "Builder Studio",
-    "email": "builder@studio.com",
-    "address": "Villa 890",
-    "buildgins": [875, 22]
+    "id": 45127,
+    "name": "Tower Comps",
+    "email": "tower@comps.com",
+    "address": "Villa 123",
+    "buildings": [875, 22]
   },
   {
-    "id": 4,
+    "id": 12647,
     "name": "Builder Studio",
     "email": "builder@studio.com",
-    "address": "Villa 890",
-    "buildgins": [875, 22]
+    "address": "Villa 147",
+    "buildings": [875, 22]
   },
   {
-    "id": 5,
+    "id": 12547,
+    "name": "Builder Studio",
+    "email": "builder@studio.com",
+    "address": "Villa 456",
+    "buildings": [875, 22]
+  },
+  {
+    "id": 45687,
     "name": "Builder Studio",
     "email": "builder@studio.com",
     "address": "Villa 890",
-    "buildgins": [875, 22]
+    "buildings": [875, 22]
   }
 ]
