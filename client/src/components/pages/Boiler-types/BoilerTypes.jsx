@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import boilerTypesData from './boilertypesData.json';
 import BoilerTypesList from './BoilerTypesList';
+import AddBoilerType from './AddBoilerType'
+import EditBoilerType from './EditBoilerType'
 import './boilerTypes.css'
 
 
@@ -38,20 +40,31 @@ const BoilerTypes = () => {
 
   //DELETE Building
   const deleteBoilerType = (id) =>
-  setBoilerType(boilerType.filter((type) => type.id !== id));
+  setBoilerType(boilerType.filter((boilerType) => boilerType.id !== id));
 
 
   return (
     <div>
-
       <h1>Boiler Types</h1>
-
       <div className= "list">
         <BoilerTypesList 
           boilerTypesData={boilerTypesData}
           deleteBoilerType={deleteBoilerType}
           editBoilerType={editBoilerType} />
       </div>
+      {edit ? (
+        <div>
+          <EditBoilerType
+            currentBoilerType={currentBoilerType}
+            setEdit={setEdit}
+            updateBoilerType={updateBoilerType}
+          />
+        </div>
+      ) : (
+        <div>
+          <AddBoilerType addBoilerType={addBoilerType} />
+        </div>
+      )}
     </div>
   );
 };
