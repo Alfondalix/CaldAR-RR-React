@@ -22,7 +22,9 @@ const Buildings = () => {
   const editBuilding = (id, building) => {
     setEdit(true);
     setCurrentBuilding(building);
+    console.log(building);
   };
+
   const updateBuilding = (newBuilding) => {
     setBuilding(
       buildings.map((building) =>
@@ -36,7 +38,6 @@ const Buildings = () => {
   const addBuilding = (newbuilding) => {
     newbuilding.id = building.length + 1;
     setBuilding([...building, newbuilding]);
-    console.log(newbuilding);
   };
 
   //DELETE Building

@@ -5,10 +5,6 @@ const EditBuilding = (props) => {
   const [building, setBuilding] = useState(props.currentBuilding);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    setBuilding(props.currentBuilding);
-  }, [props]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBuilding({ ...building, [name]: value });
@@ -22,6 +18,10 @@ const EditBuilding = (props) => {
     setOpen(false);
     props.setEdit(false);
   };
+
+  useEffect(() => {
+    setBuilding(props.currentBuilding);
+  }, [props]);
 
   const handleOpen = () => {
     setOpen(true);

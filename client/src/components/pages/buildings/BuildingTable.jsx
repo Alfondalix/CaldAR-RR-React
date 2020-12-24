@@ -14,9 +14,9 @@ const BuildingTable = (props) => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody classname="table-body">
           {props.building.map((building) => (
-            <tr key={building.id}>
+            <tr className="table-row" key={building.id}>
               <td>{building.id}</td>
               <td>{building.fullName}</td>
               <td>{building.address}</td>
