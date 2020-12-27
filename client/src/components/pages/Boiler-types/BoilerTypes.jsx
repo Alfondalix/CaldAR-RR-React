@@ -3,7 +3,6 @@ import boilerTypesData from './boilertypesData.json';
 import BoilerTypesList from './BoilerTypesList';
 import AddBoilerType from './AddBoilerType';
 import EditBoilerType from './EditBoilerType';
-import styles from './boilerTypes.module.css';
 
 const BoilerTypes = () => {
   const initialBoilerType = {

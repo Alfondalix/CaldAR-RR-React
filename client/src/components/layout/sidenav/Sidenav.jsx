@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, {
+  NavItem,
+  NavIcon,
+  NavText,
+} from '@trendmicro/react-sidenav';
 import { Link } from 'react-router-dom';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
@@ -17,9 +21,10 @@ const Sidenav = () => {
   setInterval(UpdateTime, 1000);
 
   return (
-    <SideNav style={{ top: 80, justifyContent: 'center' }}>
-      <SideNav.Toggle style={{ marginBottom: 30 }} />
-
+    <SideNav
+      style={{ top: 80, justifyContent: 'center', backgroundColor: '#374777' }}
+    >
+      <SideNav.Toggle style={{ marginBottom: 0 }} />
       <SideNav.Nav defaultSelected="companies">
         <Link
           to="/companies"
@@ -27,7 +32,7 @@ const Sidenav = () => {
         >
           <NavItem eventKey="companies" style={{ marginBottom: 40 }}>
             <NavIcon>
-              <i className="fas fa-hotel" style={{ fontSize: '26px' }} />
+              <i className="fas fa-hotel" style={{ fontSize: '20px' }} />
             </NavIcon>
             <NavText style={{ fontSize: '18px' }}>Companies</NavText>
           </NavItem>
@@ -38,7 +43,7 @@ const Sidenav = () => {
         >
           <NavItem eventKey="buildings" style={{ marginBottom: 40 }}>
             <NavIcon>
-              <i className="far fa-building" style={{ fontSize: '26px' }} />
+              <i className="far fa-building" style={{ fontSize: '20px' }} />
             </NavIcon>
             <NavText style={{ fontSize: '18px' }}>Buildings</NavText>
           </NavItem>
@@ -74,7 +79,7 @@ const Sidenav = () => {
         >
           <NavItem eventKey="technicians" style={{ marginBottom: 100 }}>
             <NavIcon>
-              <i className="fas fa-hard-hat" style={{ fontSize: '26px' }} />
+              <i className="fas fa-hard-hat" style={{ fontSize: '20px' }} />
             </NavIcon>
             <NavText style={{ fontSize: '18px' }}>Technicians</NavText>
           </NavItem>

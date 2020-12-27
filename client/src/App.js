@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/layout/header/Header';
 import Sidenav from './components/layout/sidenav/Sidenav';
 import Buildings from './components/pages/buildings/Buildings.jsx';
-import Companies from './components/pages/Companies';
+import Companies from './components/pages/companies/Companies.jsx';
 import Boilers from './components/pages/Boilers';
 import Technicians from './components/pages/Technicians';
 import BoilerTypes from './components/pages/Boiler-types/BoilerTypes.jsx';
