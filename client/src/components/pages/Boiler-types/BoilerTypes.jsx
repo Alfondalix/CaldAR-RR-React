@@ -19,9 +19,9 @@ const BoilerTypes = () => {
   const [currentBoilerType, setCurrentBoilerType] = useState(initialBoilerType);
 
   // ADD Building
-  const addBoilerType = (boilerType) => {
-    boilerType.id = boilerTypesData.length + 1;
-    setBoilerType([...boilerTypesData, boilerType]);
+  const addBoilerType = (boilerTypePar) => {
+    boilerTypePar.id = boilerType.length + 1;
+    setBoilerType([...boilerType, boilerTypePar]);
   };
 
   // EDIT Building
@@ -31,8 +31,8 @@ const BoilerTypes = () => {
   };
   const updateBoilerType = (newBoilerType) => {
     setBoilerType(
-      boilerTypesData.map((boilerType) =>
-      boilerType.id === currentBoilerType.id ? newBoilerType : boilerType
+      boilerType.map((boilerType) =>
+      boilerType.id === newBoilerType.id ? newBoilerType : boilerType
       )
     );
     setEdit(false);
@@ -47,7 +47,7 @@ const BoilerTypes = () => {
     <div>
       <div className= "list">
         <BoilerTypesList 
-          boilerTypesData={boilerTypesData}
+          boilerTypesData={boilerType}
           deleteBoilerType={deleteBoilerType}
           editBoilerType={editBoilerType} />
       </div>

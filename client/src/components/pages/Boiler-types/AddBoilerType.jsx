@@ -53,7 +53,7 @@ const AddBoilertype = (props) => {
                         <input
                             className="u-full-width"
                             type="text"
-                            name="Name"
+                            name="name"
                             placeholder="Name..."
                             value={boilerType.name}
                             onChange={handleChange}
@@ -61,7 +61,7 @@ const AddBoilertype = (props) => {
                         <input
                             className="u-full-width"
                             type="text"
-                            name="Description"
+                            name="description"
                             placeholder="Description..."
                             value={boilerType.description}
                             onChange={handleChange}

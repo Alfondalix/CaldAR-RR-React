@@ -43,13 +43,13 @@ const EditBoilerType = (props) => {
                     <input
                         type="text"
                         value={boilerType.name}
-                        name="Name"
+                        name="name"
                         onChange={handleChange}
                     />
                     <input
                         type="text"
                         value={boilerType.description}
-                        name="Description"
+                        name="description"
                         onChange={handleChange}
                     />
                     <button type="submit" onClick={handleSubmit}>
