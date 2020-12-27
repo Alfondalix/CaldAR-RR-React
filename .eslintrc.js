@@ -4,9 +4,10 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: 'eslint:recommended',
+  extends: 'react-app',
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: 11,
+    sourceType: 'module',
   },
   rules: {
     semi: ['error', 'always'],
