@@ -20,8 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "prettier": "prettier --write .",
-    "postinstall": "husky install"
+    "prettier": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [

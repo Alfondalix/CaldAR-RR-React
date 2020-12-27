@@ -29,6 +29,7 @@ const AddBuilding = (props) => {
       handleChange(e, props.addBuilding(building));
     }
     setOpen(false);
+    setBuilding(newBuilding);
   };
 
   const handleOpen = () => {

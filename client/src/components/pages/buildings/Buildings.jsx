@@ -22,7 +22,6 @@ const Buildings = () => {
   const editBuilding = (id, building) => {
     setEdit(true);
     setCurrentBuilding(building);
-    console.log(building);
   };
 
   const updateBuilding = (newBuilding) => {
