@@ -94,4 +94,5 @@ const AddBoiler = (props) => {
     </>
   );
 };
+
 export default AddBoiler;
