@@ -4,7 +4,6 @@ import CompaniesTable from './companiesTable.jsx';
 import styles from './companies.module.css';
 
 const Companies = () => {
-
   const [company, setCompany] = useState(companies);
 
   // DELETE COMPANY

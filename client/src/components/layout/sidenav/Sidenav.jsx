@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import SideNav, { Toggle, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, {
+  NavItem,
+  NavIcon,
+  NavText,
+} from '@trendmicro/react-sidenav';
 import { Link } from 'react-router-dom';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
@@ -17,7 +21,9 @@ const Sidenav = () => {
   setInterval(UpdateTime, 1000);
 
   return (
-    <SideNav style={{ top: 80, justifyContent: 'center', backgroundColor: '#374777' }}>
+    <SideNav
+      style={{ top: 80, justifyContent: 'center', backgroundColor: '#374777' }}
+    >
       <SideNav.Toggle style={{ marginBottom: 0 }} />
       <SideNav.Nav defaultSelected="companies">
         <Link

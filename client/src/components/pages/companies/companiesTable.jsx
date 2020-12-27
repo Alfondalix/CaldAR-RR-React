@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,30 +13,12 @@ import EditCompany from './editCompany';
 import AddCompany from './addCompany';
 
 const CompaniesTable = (props) => {
-  const initialCompany = {
-    id: null,
-    name: '',
-    email: '',
-    address: '',
-    buildings: null,
-  };
 
   // ADD COMPANY
   const addCompany = (newcompany) => {
     newcompany.id = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
     props.setCompany([...props.company, newcompany]);
   };
-
-  // const [edit, setEdit] = useState(false);
-  const [currentCompany, setCurrentCompany] = useState(initialCompany);
-
-  // EDIT COMPANY
-  // const editCompany = (id, company) => {
-  //   setEdit(true);
-  //   console.log(company)
-  //   console.log(id)
-  //   setCurrentCompany(company);
-  // };
 
   const updateCompany = (newcompany) => {
     props.setCompany(

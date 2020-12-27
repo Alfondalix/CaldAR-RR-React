@@ -8,8 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import styles from './forms.module.css';
 
 const AddCompany = (props) => {
-
-  const newCompany =  {
+  const newCompany = {
     id: null,
     name: '',
     email: '',
@@ -21,18 +20,13 @@ const AddCompany = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setCompany({...company, [name]: value});
+    const { name, value } = e.target;
+    setCompany({ ...company, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      company.name &&
-      company.email &&
-      company.address &&
-      company.buildings
-    ) {
+    if (company.name && company.email && company.address && company.buildings) {
       handleChange(e, props.addCompany(company));
     }
     setCompany(newCompany);
@@ -47,28 +41,50 @@ const AddCompany = (props) => {
     setOpen(false);
   };
 
-  return(
+  return (
     <div className={styles.container}>
-      <Button variant="contained" 
-                color="primary"
-                onClick={handleOpen}
-                >
-                  <AddBoxIcon />
+      <Button variant="contained" color="primary" onClick={handleOpen}>
+        <AddBoxIcon />
       </Button>
-      <Modal 
-      open={open}
-      onClose={handleClose}
-      >
-        <form className={styles.formModal} >
-          <TextField id="outlined-basic" label="NAME" variant="outlined" onChange={handleChange} value={company.name} name="name" />
-          <TextField id="outlined-basic" label="EMAIL" variant="outlined" onChange={handleChange} value={company.email} name="email" />
-          <TextField id="outlined-basic" label="ADDRESS" variant="outlined" onChange={handleChange} value={company.addres} name="address" />
-          <TextField id="outlined-basic" label="BUILDINGS" variant="outlined" onChange={handleChange} value={company.buildings} name="buildings" />
+      <Modal open={open} onClose={handleClose}>
+        <form className={styles.formModal}>
+          <TextField
+            id="outlined-basic"
+            label="NAME"
+            variant="outlined"
+            onChange={handleChange}
+            value={company.name}
+            name="name"
+          />
+          <TextField
+            id="outlined-basic"
+            label="EMAIL"
+            variant="outlined"
+            onChange={handleChange}
+            value={company.email}
+            name="email"
+          />
+          <TextField
+            id="outlined-basic"
+            label="ADDRESS"
+            variant="outlined"
+            onChange={handleChange}
+            value={company.addres}
+            name="address"
+          />
+          <TextField
+            id="outlined-basic"
+            label="BUILDINGS"
+            variant="outlined"
+            onChange={handleChange}
+            value={company.buildings}
+            name="buildings"
+          />
           <div>
-            <Button onClick={handleSubmit} >
+            <Button onClick={handleSubmit}>
               <CheckCircleIcon />
             </Button>
-            <Button onClick={handleClose} >
+            <Button onClick={handleClose}>
               <CancelIcon />
             </Button>
           </div>
@@ -76,6 +92,6 @@ const AddCompany = (props) => {
       </Modal>
     </div>
   );
-}
+};
 
 export default AddCompany;
