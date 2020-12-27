@@ -19,7 +19,6 @@ const Sidenav = () => {
   return (
     <SideNav style={{ top: 80, justifyContent: 'center', backgroundColor: '#374777' }}>
       <SideNav.Toggle style={{ marginBottom: 0 }} />
-
       <SideNav.Nav defaultSelected="companies">
         <Link
           to="/companies"

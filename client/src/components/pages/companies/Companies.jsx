@@ -4,11 +4,12 @@ import CompaniesTable from './companiesTable.jsx';
 import styles from './companies.module.css';
 
 const Companies = () => {
-  const [companymain, setCompany] = useState(companies);
-  const company = JSON.parse(JSON.stringify(companymain));
+
+  const [company, setCompany] = useState(companies);
 
   // DELETE COMPANY
   const deleteCompany = (id) => {
+    console.log(id);
     setCompany([...company.filter((company) => company.id !== id)]);
   };
 

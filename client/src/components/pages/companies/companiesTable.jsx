@@ -27,19 +27,21 @@ const CompaniesTable = (props) => {
     props.setCompany([...props.company, newcompany]);
   };
 
-  const [edit, setEdit] = useState(false);
-  const [currentCompany, setCurrentCompany] = useState(props.company);
+  // const [edit, setEdit] = useState(false);
+  const [currentCompany, setCurrentCompany] = useState(initialCompany);
 
   // EDIT COMPANY
-  const editCompany = (id, company) => {
-    setEdit(true);
-    setCurrentCompany(company);
-  };
+  // const editCompany = (id, company) => {
+  //   setEdit(true);
+  //   console.log(company)
+  //   console.log(id)
+  //   setCurrentCompany(company);
+  // };
 
   const updateCompany = (newcompany) => {
     props.setCompany(
       props.company.map((company) =>
-        company.id === currentCompany.id ? newcompany : company
+        company.id === newcompany.id ? newcompany : company
       )
     );
   };
@@ -72,9 +74,9 @@ const CompaniesTable = (props) => {
                 <TableCell align="center">
                   <Button>
                     <EditCompany
-                      currentCompany={currentCompany}
+                      currentCompany={company}
                       updateCompany={updateCompany}
-                      editCompany={editCompany}
+                      // editCompany={editCompany}
                     />
                   </Button>
                   <Button
