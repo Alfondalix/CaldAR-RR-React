@@ -42,29 +42,28 @@ const Boilers = () => {
   const deleteBoiler = (id) =>
     setBoilers(boiler.filter((user) => user.id !== id));
 
-  return (
-    <div className={styles.container}>
-      <h1>Boilers</h1>
-      {edit ? (
-        <div>
-          <EditBoiler className={styles.table}
-            currentBoiler={currentBoiler}
-            setEdit={setEdit}
-            updateBoiler={updateBoiler}
-          />
-        </div>
-      ) : (
-        <div className={styles.table}>
-          <AddBoiler addBoiler={addBoiler} />
-        </div>
-      )}
-      <BoilersTable className={styles.table}
-        boiler={boiler}
-        deleteBoiler={deleteBoiler}
-        editBoiler={editBoiler}
-      />
-    </div>
-  );
-};
+ return (
+      <div>
+        <BoilersTable
+          boiler={boiler}
+          deleteBoiler={deleteBoiler}
+          editBoiler={editBoiler}
+        />
+        {edit ? (
+          <div>
+            <EditBoiler
+              currentBoiler={currentBoiler}
+              setEdit={setEdit}
+              updateBoiler={updateBoiler}
+            />
+          </div>
+        ) : (
+          <div>
+            <AddBoiler addBoiler={addBoiler} />
+          </div>
+        )}
+      </div>
+    );
+  };
 
 export default Boilers;
