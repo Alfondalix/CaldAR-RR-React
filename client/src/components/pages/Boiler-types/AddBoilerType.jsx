@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
+import styles from './boilerTypes.module.css';
 
 const AddBoilertype = (props) => {
     const newBoilerType = {
@@ -12,6 +13,7 @@ const AddBoilertype = (props) => {
     const [open, setOpen] = useState(false);
 
     const handleChange = (e) => {
+        console.log(e)
         const { name, value } = e.target;
         setBoilerType({ ...boilerType, [name]: value });
     };
@@ -37,40 +39,43 @@ const AddBoilertype = (props) => {
 
     return (
         <>
-            <button type="button" onClick={handleOpen}>
-                New Boiler Type
+            <button className= {styles.addBtn} type="button" onClick={handleOpen}>
+                <i class="fas fa-plus-circle"></i>
             </button>
-            <Modal
-                open={open}
-                onClose={(handleClose, handleSubmit)}
-                aria-labelledby="simple-modal-title"
-            >
-                <form>
-                    <input
-                        className="u-full-width"
-                        type="text"
-                        name="Name"
-                        placeholder="Name..."
-                        value={boilerType.name}
-                        onChange={handleChange}
-                    />
-                    <input
-                        className="u-full-width"
-                        type="text"
-                        name="Description"
-                        placeholder="Description..."
-                        value={boilerType.description}
-                        onChange={handleChange}
-                    />
-                <button
-                    className="button-primary"
-                    type="submit"
-                    onClick={handleSubmit}
+            <div>
+                <Modal
+                    open={open}
+                    onClose={(handleClose, handleSubmit)}
+                    aria-labelledby="simple-modal-title"
+                    className = {styles.modal}
                 >
-                    Add
-                </button>
-            </form>
-            </Modal>
+                    <form className= {styles.editForm}>
+                        <input
+                            className="u-full-width"
+                            type="text"
+                            name="Name"
+                            placeholder="Name..."
+                            value={boilerType.name}
+                            onChange={handleChange}
+                        />
+                        <input
+                            className="u-full-width"
+                            type="text"
+                            name="Description"
+                            placeholder="Description..."
+                            value={boilerType.description}
+                            onChange={handleChange}
+                        />
+                    <button
+                        className="button-primary"
+                        type="submit"
+                        onClick={handleSubmit}
+                    >
+                        Add
+                    </button>
+                </form>
+                </Modal>
+            </div>
         </>
     );
 };

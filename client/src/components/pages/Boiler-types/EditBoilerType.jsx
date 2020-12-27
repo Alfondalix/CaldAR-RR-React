@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
+import styles from './boilerTypes.module.css';
 
 const EditBoilerType = (props) => {
     const [boilerType, setBoilerType] = useState(props.currentBoilerType);
@@ -29,13 +30,16 @@ const EditBoilerType = (props) => {
 
     return (
         <>
-            <button onClick={handleOpen}>Edit</button>
+            <button onClick={handleOpen} className={styles.addBtn}>
+                <i class="far fa-edit"></i>
+            </button>
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="simple-modal-title"
+                className= {styles.modal}
             >
-                <form>
+                <form className= {styles.editForm}>
                     <input
                         type="text"
                         value={boilerType.name}

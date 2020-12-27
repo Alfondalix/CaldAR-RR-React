@@ -3,7 +3,7 @@ import boilerTypesData from './boilertypesData.json';
 import BoilerTypesList from './BoilerTypesList';
 import AddBoilerType from './AddBoilerType'
 import EditBoilerType from './EditBoilerType'
-import './boilerTypes.css'
+import styles from './boilerTypes.module.css'
 
 
 const BoilerTypes = () => {
@@ -45,7 +45,6 @@ const BoilerTypes = () => {
 
   return (
     <div>
-      <h1>Boiler Types</h1>
       <div className= "list">
         <BoilerTypesList 
           boilerTypesData={boilerTypesData}
