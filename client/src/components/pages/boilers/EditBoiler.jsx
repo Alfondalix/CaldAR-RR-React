@@ -71,4 +71,5 @@ const EditBoiler = (props) => {
     </>
   );
 };
+
 export default EditBoiler;
