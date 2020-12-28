@@ -3,7 +3,6 @@ import boilers from './Boilers.json';
 import BoilersTable from './BoilersTable';
 import AddBoiler from './AddBoiler';
 import EditBoiler from './EditBoiler';
-import styles from './Boilers.module.css'
 
 const Boilers = () => {
   const initialBoiler = {
@@ -42,28 +41,28 @@ const Boilers = () => {
   const deleteBoiler = (id) =>
     setBoilers(boiler.filter((user) => user.id !== id));
 
- return (
-      <div>
-        <BoilersTable
-          boiler={boiler}
-          deleteBoiler={deleteBoiler}
-          editBoiler={editBoiler}
-        />
-        {edit ? (
-          <div>
-            <EditBoiler
-              currentBoiler={currentBoiler}
-              setEdit={setEdit}
-              updateBoiler={updateBoiler}
-            />
-          </div>
-        ) : (
-          <div>
-            <AddBoiler addBoiler={addBoiler} />
-          </div>
-        )}
-      </div>
-    );
-  };
+  return (
+    <div>
+      <BoilersTable
+        boiler={boiler}
+        deleteBoiler={deleteBoiler}
+        editBoiler={editBoiler}
+      />
+      {edit ? (
+        <div>
+          <EditBoiler
+            currentBoiler={currentBoiler}
+            setEdit={setEdit}
+            updateBoiler={updateBoiler}
+          />
+        </div>
+      ) : (
+        <div>
+          <AddBoiler addBoiler={addBoiler} />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Boilers;
