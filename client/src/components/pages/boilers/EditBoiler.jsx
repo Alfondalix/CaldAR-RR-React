@@ -27,14 +27,17 @@ const EditBoiler = (props) => {
   };
 
   return (
-    <>
-      <button onClick={handleOpen}>Edit Boilers</button>
+    <div className="edit-container">
+      <button className="add-btn" onClick={handleOpen}>
+        <i class="far fa-edit"></i>
+      </button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
+        aria-labelledby="Edit Boiler"
+        className="modal"
       >
-        <form>
+        <form className="edit-form">
           <input
             type="text"
             value={boiler.idType}
@@ -44,31 +47,31 @@ const EditBoiler = (props) => {
           <input
             type="time"
             value={boiler.startTime}
-            name="startTime"
+            name="Start Time"
             onChange={handleChange}
           />
           <input
             type="time"
             value={boiler.endTime}
-            name="endTime"
+            name="End Time"
             onChange={handleChange}
           />
           <input
             type="number"
             value={boiler.monthlyHours}
-            name="monthlyHorus"
+            name="Monthly Hours"
             onChange={handleChange}
           />
 
           <button type="submit" onClick={handleSubmit}>
             Edit Boiler
           </button>
-          <button type="submit" onClick={() => props.setEditing(false)}>
+          <button type="submit" onClick={() => props.setEdit(false)}>
             Cancel
           </button>
         </form>
       </Modal>
-    </>
+    </div>
   );
 };
 

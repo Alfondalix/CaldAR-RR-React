@@ -41,15 +41,16 @@ const AddBoiler = (props) => {
 
   return (
     <>
-      <button type="button" onClick={handleOpen}>
-        New Boilers
+      <button className="add-btn" type="button" onClick={handleOpen}>
+        <i class="fas fa-plus-circle"></i>
       </button>
+      <div className="edit-container">
       <Modal
         open={open}
         onClose={(handleClose, handleSubmit)}
-        aria-labelledby="simple-modal-title"
+        aria-labelledby="Add Boiler"
       >
-        <form>
+        <form action="Submit" className="edit-form">
           <input
             className="u-full-width"
             type="text"
@@ -91,6 +92,7 @@ const AddBoiler = (props) => {
           </button>
         </form>
       </Modal>
+      </div>
     </>
   );
 };
