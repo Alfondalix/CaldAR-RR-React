@@ -17,9 +17,9 @@ const URL = 'http://caldar-grupo7.herokuapp.com/api/boilers';
 
 const getBoilersPending = () => ({
   type: GET_BOILERS_PENDING,
-  payload: {
+    payload: {
     
-  }
+  },
 });
 
 const getBoilersFulfilled = (payload) => ({
