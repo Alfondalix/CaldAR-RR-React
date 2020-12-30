@@ -17,6 +17,9 @@ const URL = 'http://caldar-grupo7.herokuapp.com/api/boilers';
 
 const getBoilersPending = () => ({
   type: GET_BOILERS_PENDING,
+  payload: {
+    
+  }
 });
 
 const getBoilersFulfilled = (payload) => ({
@@ -53,11 +56,11 @@ const postBoilerRejected = () => ({
   type: POST_BOILERS_REJECTED,
 });
 
-export const postBoiler = (building) => (dispatch) => {
+export const postBoiler = (boiler) => (dispatch) => {
   dispatch(postBoilerPending());
   return fetch(URL, {
     method: 'POST',
-    body: JSON.stringify(building),
+    body: JSON.stringify(boiler),
   })
     .then((data) => data.json())
     .then((res) => {
