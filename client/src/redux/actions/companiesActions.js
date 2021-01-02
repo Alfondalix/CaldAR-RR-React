@@ -1,7 +1,7 @@
 import {
-  SHOW_COMPANIES_FETCHING,
-  SHOW_COMPANIES_REJECTED,
-  SHOW_COMPANIES_FULFILLED,
+  GET_COMPANIES_FETCHING,
+  GET_COMPANIES_REJECTED,
+  GET_COMPANIES_FULFILLED,
   ADD_COMPANY_FETCHING,
   ADD_COMPANY_FULFILLED,
   ADD_COMPANY_REJECTED,
@@ -13,24 +13,29 @@ import {
   DELETE_COMPANY_REJECTED,
 } from '../types/companiesTypes';
 
-const URL = 'https://caldar-rr-alfonso.herokuapp.com/api/companies';
+const URL = 'https://cors-anywhere.herokuapp.com/https://caldar-2020.herokuapp.com/api/companies';
 
-const getCompaniesFetching = () => (dispatch) => ({
-  type: SHOW_COMPANIES_FETCHING,
+const getCompaniesFetching = () => ({
+  type: GET_COMPANIES_FETCHING,
 });
 
 const getCompaniesFulfilled = (payload) => ({
-  type: SHOW_COMPANIES_FULFILLED,
+  type: GET_COMPANIES_FULFILLED,
   payload,
 });
 
-const getCompaniesRejected = () => (dispatch) => ({
-  type: SHOW_COMPANIES_REJECTED,
+const getCompaniesRejected = () => ({
+  type: GET_COMPANIES_REJECTED,
 });
 
 export const getCompanies = () => (dispatch) => {
   dispatch(getCompaniesFetching());
-  return fetch(URL)
+  return fetch(URL, {
+    'mode': 'cors',
+    'headers': {
+        'Access-Control-Allow-Origin': '*',
+    }
+  })
     .then((data) => data.json())
     .then((response) => {
       dispatch(getCompaniesFulfilled(response));
@@ -55,7 +60,7 @@ const addCompanyRejected = () => ({
 
 export const addCompany = (company) => (dispatch) => {
   dispatch(addCompanyFetching());
-  return fetch(URL, {
+  return fetch('https://caldar-2020.herokuapp.com/api/companies', {
     method: 'POST',
     body: JSON.stringify(company),
   })
@@ -81,12 +86,12 @@ const deleteCompanyRejected = () => ({
   type: DELETE_COMPANY_REJECTED,
 });
 
-export const deleteCompany = (id) => (dispatch) => {
+export const deleteCompany = (_id) => (dispatch) => {
   dispatch(deleteCompanyFetching());
-  return fetch(`${URL}${resource}/${_id}`, { method: 'DELETE' })
+  return fetch(`${URL}/${_id}`, { method: 'DELETE' })
     .then((data) => data.json())
     .then(() => {
-      dispatch(deleteCompanyFulfilled(id));
+      dispatch(deleteCompanyFulfilled(_id));
     })
     .catch(() => {
       dispatch(deleteCompanyRejected());
@@ -106,7 +111,7 @@ const updateCompanyRejected = () => ({
   type: EDIT_COMPANY_REJECTED,
 });
 
-export const updateCompany = (newCompany) => {
+export const updateCompany = (newCompany) => dispatch => {
 
   dispatch(updateCompanyFetching());
   return fetch(`${URL}/${newCompany._id}`, {

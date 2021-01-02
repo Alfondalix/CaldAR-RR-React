@@ -1,7 +1,7 @@
 import {
-  SHOW_COMPANIES_FETCHING,
-  SHOW_COMPANIES_FULFILLED,
-  SHOW_COMPANIES_REJECTED,
+  GET_COMPANIES_FETCHING,
+  GET_COMPANIES_FULFILLED,
+  GET_COMPANIES_REJECTED,
   ADD_COMPANY_FETCHING,
   ADD_COMPANY_FULFILLED,
   ADD_COMPANY_REJECTED,
@@ -19,16 +19,16 @@ const initialState = {
 
 const CompanyReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_COMPANIES_FETCHING:
+    case GET_COMPANIES_FETCHING:
       return {
         ...state,
       };
-    case SHOW_COMPANIES_FULFILLED:
+    case GET_COMPANIES_FULFILLED:
       return {
         ...state,
         list: action.payload,
       };
-    case SHOW_COMPANIES_REJECTED:
+    case GET_COMPANIES_REJECTED:
       return {
         ...state,
       };

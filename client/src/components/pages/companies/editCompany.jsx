@@ -52,7 +52,7 @@ const EditCompany = (props) => {
               label="NAME"
               variant="outlined"
               onChange={handleChange}
-              value={comp.name}
+              value={comp.cuit}
               name="name"
             />
             <TextField
@@ -68,7 +68,7 @@ const EditCompany = (props) => {
               label="ADDRESS"
               variant="outlined"
               onChange={handleChange}
-              value={comp.address}
+              value={comp.adress}
               name="address"
             />
             <TextField
