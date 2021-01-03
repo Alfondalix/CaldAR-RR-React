@@ -13,7 +13,7 @@ import {
   DELETE_COMPANY_REJECTED,
 } from '../types/companiesTypes';
 
-const URL = 'https://cors-anywhere.herokuapp.com/https://caldar-2020.herokuapp.com/api/companies';
+const URL = 'http://localhost:5000/api/companies';
 
 const getCompaniesFetching = () => ({
   type: GET_COMPANIES_FETCHING,
@@ -30,12 +30,7 @@ const getCompaniesRejected = () => ({
 
 export const getCompanies = () => (dispatch) => {
   dispatch(getCompaniesFetching());
-  return fetch(URL, {
-    'mode': 'cors',
-    'headers': {
-        'Access-Control-Allow-Origin': '*',
-    }
-  })
+  return fetch(URL)
     .then((data) => data.json())
     .then((response) => {
       dispatch(getCompaniesFulfilled(response));
@@ -59,9 +54,11 @@ const addCompanyRejected = () => ({
 });
 
 export const addCompany = (company) => (dispatch) => {
+  console.log(company)
   dispatch(addCompanyFetching());
-  return fetch('https://caldar-2020.herokuapp.com/api/companies', {
+  return fetch(URL, {
     method: 'POST',
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(company),
   })
     .then((data) => data.json())
@@ -112,11 +109,12 @@ const updateCompanyRejected = () => ({
 });
 
 export const updateCompany = (newCompany) => dispatch => {
-
+  console.log(newCompany)
   dispatch(updateCompanyFetching());
   return fetch(`${URL}/${newCompany._id}`, {
     method: 'PUT',
-    body: JSON.stringify({ newCompany }),
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(newCompany),
   })
     .then((response) => response.json())
     .then(() => {

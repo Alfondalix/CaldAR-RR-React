@@ -39,7 +39,7 @@ const CompanyReducer = (state = initialState, action) => {
     case ADD_COMPANY_FULFILLED:
       return {
         ...state,
-        list: action.payload,
+        list: [...state.list, action.payload],
       };
     case ADD_COMPANY_REJECTED:
       return {
@@ -52,7 +52,9 @@ const CompanyReducer = (state = initialState, action) => {
     case DELETE_COMPANY_FULFILLED:
       return {
         ...state,
-        list: state.list.filter((company) => company._id !== action.payload),
+        list: state.list.filter(
+          (company) => company._id !== action.payload
+        ),
       };
     case DELETE_COMPANY_REJECTED:
       return {
@@ -65,7 +67,9 @@ const CompanyReducer = (state = initialState, action) => {
     case EDIT_COMPANY_FULFILLED:
       return {
         ...state,
-        list: state.list.map((company) => company._id === action.payload ? (company = action.payload) : company),
+        list: state.list.map((company) =>
+          company._id === action.payload._id ? action.payload : company
+        ),
       };
     case EDIT_COMPANY_REJECTED:
       return {

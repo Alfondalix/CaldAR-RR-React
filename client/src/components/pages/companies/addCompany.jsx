@@ -26,10 +26,7 @@ const AddCompany = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(company)
-    props.addCompany({
-      company
-    });
+    props.addCompany(company);
     setOpen(false);
     setCompany(newCompany);
   };

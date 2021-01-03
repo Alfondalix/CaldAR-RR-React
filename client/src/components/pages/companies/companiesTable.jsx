@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -29,6 +29,10 @@ const CompaniesTable = ({ companies, getCompanies, deleteCompany, updateCompany,
 
   const addNewCompany = (company) => {
     addCompany(company);
+  };
+
+  const updateCurCompany = (company) => {
+    updateCompany(company);
   };
 
   // ADD COMPANY
@@ -62,7 +66,7 @@ const CompaniesTable = ({ companies, getCompanies, deleteCompany, updateCompany,
             </TableRow>
           </TableHead>
           <TableBody className={styles.items}>
-            {companies.list.map((company) => (
+            {companies && companies.map((company) => (
               <TableRow key={company._id}>
                 <TableCell align="right">{company.cuit}</TableCell>
                 <TableCell align="right">{company.email}</TableCell>
@@ -72,8 +76,7 @@ const CompaniesTable = ({ companies, getCompanies, deleteCompany, updateCompany,
                   <Button>
                     <EditCompany
                       currentCompany={company}
-                      // updateCompany={updateCompany}
-                      // editCompany={editCompany}
+                      updateCompany={updateCurCompany}
                     />
                   </Button>
                   <Button
@@ -107,7 +110,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    companies: state.Company,
+    companies: state.Company.list,
   };
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CompaniesTable from './companiesTable.jsx';
 import styles from './companies.module.css';
 

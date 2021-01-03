@@ -18,9 +18,7 @@ const EditCompany = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (comp.name) {
-      props.updateCompany(comp);
-    }
+    props.updateCompany(comp)
     setOpen(false);
   };
 
@@ -49,11 +47,11 @@ const EditCompany = (props) => {
           <form className={styles.formModal}>
             <TextField
               id="outlined-basic"
-              label="NAME"
+              label="CUIT"
               variant="outlined"
               onChange={handleChange}
               value={comp.cuit}
-              name="name"
+              name="cuit"
             />
             <TextField
               id="outlined-basic"
@@ -69,7 +67,7 @@ const EditCompany = (props) => {
               variant="outlined"
               onChange={handleChange}
               value={comp.adress}
-              name="address"
+              name="adress"
             />
             <TextField
               id="outlined-basic"
