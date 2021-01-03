@@ -22,7 +22,6 @@ const AddBuilding = (props) => {
     e.preventDefault();
     props.postBuilding(building);
     setOpen(false);
-    // setBuilding(newBuilding);
   };
 
   const handleOpen = () => {
