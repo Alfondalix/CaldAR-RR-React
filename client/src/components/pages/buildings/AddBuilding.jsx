@@ -20,16 +20,9 @@ const AddBuilding = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      building.fullName &&
-      building.address &&
-      building.boilers &&
-      building.phoneNumber
-    ) {
-      handleChange(e, props.addBuilding(building));
-    }
+    props.postBuilding(building);
     setOpen(false);
-    setBuilding(newBuilding);
+    // setBuilding(newBuilding);
   };
 
   const handleOpen = () => {

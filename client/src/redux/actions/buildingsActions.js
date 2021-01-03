@@ -13,7 +13,7 @@ import {
   DELETE_BUILDINGS_REJECTED,
 } from '../types/actionTypes';
 
-const URL = 'https://caldar-rr-alfonso.herokuapp.com/api/buildings';
+const URL = 'http://localhost:5000/api/buildings';
 
 const getBuildingsPending = () => ({
   type: GET_BUILDINGS_PENDING,
@@ -57,14 +57,15 @@ export const postBuilding = (building) => (dispatch) => {
   dispatch(postBuildingPending());
   return fetch(URL, {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(building),
   })
     .then((data) => data.json())
     .then((res) => {
       dispatch(postBuildingFulfilled(res));
     })
-    .catch(() => {
-      dispatch(postBuildingRejected());
+    .catch((err) => {
+      dispatch(postBuildingRejected(err));
     });
 };
 
@@ -81,12 +82,12 @@ const deleteBuildingRejected = () => ({
   type: DELETE_BUILDINGS_REJECTED,
 });
 
-export const deleteBuilding = (id) => (dispatch) => {
+export const deleteBuilding = (_id) => (dispatch) => {
   dispatch(deleteBuildingPending());
-  return fetch(URL + '/' + id, { method: 'DELETE' })
+  return fetch(`${URL}/${_id}`, { method: 'DELETE' })
     .then((data) => data.json())
     .then(() => {
-      dispatch(deleteBuildingFulfilled(id));
+      dispatch(deleteBuildingFulfilled(_id));
     })
     .catch(() => {
       dispatch(deleteBuildingRejected());
@@ -106,9 +107,11 @@ const putBuildingRejected = () => ({
 
 export const putBuilding = (newBuilding) => (dispatch) => {
   dispatch(putBuildingPending());
-  return fetch(URL + '/' + newBuilding._id, {
+  console.log(newBuilding);
+  return fetch(`${URL}/${newBuilding._id}`, {
     method: 'PUT',
-    body: JSON.stringify({ newBuilding }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newBuilding),
   })
     .then((data) => data.json())
     .then(() => {

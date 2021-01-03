@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
+import './Buildings.css';
 
 const EditBuilding = (props) => {
   const [building, setBuilding] = useState(props.currentBuilding);
@@ -12,16 +13,10 @@ const EditBuilding = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (building.fullName) {
-      props.updateBuilding(building);
-    }
+    props.putCBuilding(building);
+    console.log(building);
     setOpen(false);
-    props.setEdit(false);
   };
-
-  useEffect(() => {
-    setBuilding(props.currentBuilding);
-  }, [props]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -33,7 +28,7 @@ const EditBuilding = (props) => {
 
   return (
     <div className="edit-container">
-      <button className="add-btn" onClick={handleOpen}>
+      <button className="btn-edi" onClick={handleOpen}>
         <i class="far fa-edit"></i>
       </button>
       <Modal
@@ -42,7 +37,7 @@ const EditBuilding = (props) => {
         aria-labelledby="Edit Building"
         className="modal"
       >
-        <form className="edit-form">
+        <form className="edit-form" onSubmit={handleSubmit}>
           <input
             type="text"
             value={building.fullName}
@@ -71,7 +66,7 @@ const EditBuilding = (props) => {
           <button type="submit" onClick={handleSubmit}>
             Edit Building
           </button>
-          <button type="submit" onClick={() => props.setEdit(false)}>
+          <button type="submit" onClick={handleClose}>
             Cancel
           </button>
         </form>

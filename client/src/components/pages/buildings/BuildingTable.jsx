@@ -1,18 +1,27 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import EditBuilding from './EditBuilding.jsx';
 
 import {
-  getBuildings,
-  postBuilding,
-  deleteBuilding,
-  putBuilding,
+  getBuildings as getBuildingsAction,
+  deleteBuilding as deleteBuildingAction,
+  putBuilding as putBuildingAction,
 } from '../../../redux/actions/buildingsActions';
 
-const BuildingTable = (props) => {
+const BuildingTable = ({
+  buildings,
+  getBuildings,
+  deleteBuilding,
+  putBuilding,
+}) => {
   useEffect(() => {
     getBuildings();
-  }, []);
+  }, [getBuildings]);
+
+  const putCurrentBuilding = (building) => {
+    putBuilding(building);
+  };
 
   return (
     <div className="table-container">
@@ -28,30 +37,30 @@ const BuildingTable = (props) => {
           </tr>
         </thead>
         <tbody classname="table-body">
-          {props.buildings.list.map((building) => (
-            <tr className="table-row" key={building.id}>
-              <td>{building.id}</td>
-              <td>{building.fullName}</td>
-              <td>{building.address}</td>
-              <td>[{building.boilers.join('-')}]</td>
-              <td>{building.phoneNumber}</td>
-              <td>
-                <button
-                  className="btn-del"
-                  onClick={() => props.editBuilding(building.id, building)}
-                >
-                  <i class="far fa-edit btn-edit"></i>
-                </button>
+          {buildings &&
+            buildings.map((building) => (
+              <tr className="table-row" key={building._id}>
+                <td>{building._id}</td>
+                <td>{building.fullName}</td>
+                <td>{building.address}</td>
+                <td>{building.boilers}</td>
+                <td>{building.phoneNumber}</td>
+                <td className="btn-container">
+                  <EditBuilding
+                    currentBuilding={building}
+                    putCBuilding={putCurrentBuilding}
+                    className="btn-edi"
+                  />
 
-                <button
-                  className="btn-edi"
-                  onClick={() => props.deleteBuilding(building.id)}
-                >
-                  <i className="far fa-trash-alt btn-delete"></i>
-                </button>
-              </td>
-            </tr>
-          ))}
+                  <button
+                    className="btn-edi"
+                    onClick={() => deleteBuilding(building._id)}
+                  >
+                    <i className="far fa-trash-alt btn-delete"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
@@ -61,16 +70,17 @@ const BuildingTable = (props) => {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getBuildings,
-      deleteBuilding,
-      postBuilding,
-      putBuilding,
+      getBuildings: getBuildingsAction,
+      deleteBuilding: deleteBuildingAction,
+      putBuilding: putBuildingAction,
     },
     dispatch
   );
 
-const mapStateToProps = (state) => ({
-  buildings: state.buildings,
-});
+const mapStateToProps = (state) => {
+  return {
+    buildings: state.buildings.list,
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuildingTable);

@@ -66,9 +66,7 @@ const buildingsReducer = (state = initialState, action) => {
       return {
         ...state,
         list: state.list.map((building) =>
-          building._id === action.payload
-            ? (building = action.payload)
-            : building
+          building._id === action.payload._id ? action.payload : building
         ),
       };
     case PUT_BUILDINGS_REJECTED:
