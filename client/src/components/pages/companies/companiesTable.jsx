@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,20 +13,26 @@ import styles from './companiesTable.module.css';
 import EditCompany from './editCompany';
 import AddCompany from './addCompany';
 
-const CompaniesTable = (props) => {
+import {
+  getCompanies as getCompaniesAction,
+  deleteCompany as deleteCompanyAction,
+  updateCompany as updateCompanyAction,
+  addCompany as addCompanyAction,
+} from '../../../redux/actions/companiesActions';
 
-  // ADD COMPANY
-  const addCompany = (newcompany) => {
-    newcompany.id = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
-    props.setCompany([...props.company, newcompany]);
+import { bindActionCreators } from 'redux';
+
+const CompaniesTable = ({ companies, getCompanies, deleteCompany, updateCompany, addCompany }) => {
+  useEffect(() => {
+    getCompanies();
+  }, [getCompanies]);
+
+  const addNewCompany = (company) => {
+    addCompany(company);
   };
 
-  const updateCompany = (newcompany) => {
-    props.setCompany(
-      props.company.map((company) =>
-        company.id === newcompany.id ? newcompany : company
-      )
-    );
+  const updateCurCompany = (company) => {
+    updateCompany(company);
   };
 
   return (
@@ -34,37 +41,34 @@ const CompaniesTable = (props) => {
         <Table className={styles.table} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell align="right">COMPANY</TableCell>
+              <TableCell align="right">CUIT</TableCell>
               <TableCell align="center">EMAIL</TableCell>
               <TableCell align="right">ADDRESS</TableCell>
               <TableCell align="right">BUILDINGS</TableCell>
               <TableCell align="center">ACTIONS</TableCell>
               <TableCell align="center">
-                <AddCompany className={styles.button} addCompany={addCompany} />
+                <AddCompany className={styles.button} addCompany={addNewCompany} />
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody className={styles.items}>
-            {props.company.map((company) => (
-              <TableRow key={company.id}>
-                <TableCell component="th">{company.id}</TableCell>
-                <TableCell align="right">{company.name}</TableCell>
+            {companies && companies.map((company) => (
+              <TableRow key={company._id}>
+                <TableCell align="right">{company.cuit}</TableCell>
                 <TableCell align="right">{company.email}</TableCell>
-                <TableCell align="right">{company.address}</TableCell>
+                <TableCell align="right">{company.adress}</TableCell>
                 <TableCell align="right">{company.buildings.length}</TableCell>
                 <TableCell align="center">
                   <Button>
                     <EditCompany
                       currentCompany={company}
-                      updateCompany={updateCompany}
-                      // editCompany={editCompany}
+                      updateCompany={updateCurCompany}
                     />
                   </Button>
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => props.deleteCompany(company.id)}
+                    onClick={() => deleteCompany(company._id)}
                   >
                     <DeleteIcon />
                   </Button>
@@ -78,4 +82,22 @@ const CompaniesTable = (props) => {
   );
 };
 
-export default CompaniesTable;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getCompanies: getCompaniesAction,
+      deleteCompany: deleteCompanyAction,
+      updateCompany: updateCompanyAction,
+      addCompany: addCompanyAction,
+    },
+    dispatch
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    companies: state.Company.list,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompaniesTable);
