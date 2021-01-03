@@ -35,20 +35,6 @@ const CompaniesTable = ({ companies, getCompanies, deleteCompany, updateCompany,
     updateCompany(company);
   };
 
-  // ADD COMPANY
-  // const addCompany = (newcompany) => {
-  //   newcompany.id = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
-  //   props.setCompany([...props.company, newcompany]);
-  // };
-
-  // const updateCompany = (newcompany) => {
-  //   props.setCompany(
-  //     props.company.map((company) =>
-  //       company.id === newcompany.id ? newcompany : company
-  //     )
-  //   );
-  // };
-
   return (
     <>
       <TableContainer className={styles.container} component={Paper}>

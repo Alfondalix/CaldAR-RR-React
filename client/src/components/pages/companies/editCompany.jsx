@@ -37,7 +37,6 @@ const EditCompany = (props) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            // props.editCompany(comp.id, comp);
             handleOpen();
           }}
         >

@@ -54,7 +54,6 @@ const addCompanyRejected = () => ({
 });
 
 export const addCompany = (company) => (dispatch) => {
-  console.log(company)
   dispatch(addCompanyFetching());
   return fetch(URL, {
     method: 'POST',
@@ -109,7 +108,6 @@ const updateCompanyRejected = () => ({
 });
 
 export const updateCompany = (newCompany) => dispatch => {
-  console.log(newCompany)
   dispatch(updateCompanyFetching());
   return fetch(`${URL}/${newCompany._id}`, {
     method: 'PUT',
