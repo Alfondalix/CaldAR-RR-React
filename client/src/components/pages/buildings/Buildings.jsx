@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import buildings from './buildings.json';
 import BuildingTable from './BuildingTable';
 import AddBuilding from './AddBuilding';
-import EditBuilding from './EditBuilding';
 import './Buildings.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-const Buildings = () => {
+import { postBuilding as postBuildingAction } from '../../../redux/actions/buildingsActions';
+
+const Buildings = ({ postBuilding }) => {
   const initialBuilding = {
     id: null,
     fullName: '',
@@ -14,13 +17,15 @@ const Buildings = () => {
     phoneNumber: '',
   };
 
+  const postNewBuilding = (building) => {
+    postBuilding(building);
+  };
+
   const [building, setBuilding] = useState(buildings);
-  const [edit, setEdit] = useState(false);
   const [currentBuilding, setCurrentBuilding] = useState(initialBuilding);
 
   // EDIT Building
   const editBuilding = (id, building) => {
-    setEdit(true);
     setCurrentBuilding(building);
   };
 
@@ -30,13 +35,6 @@ const Buildings = () => {
         building.id === currentBuilding.id ? newBuilding : building
       )
     );
-    setEdit(false);
-  };
-
-  // ADD Building
-  const addBuilding = (newbuilding) => {
-    newbuilding.id = building.length + 1;
-    setBuilding([...building, newbuilding]);
   };
 
   //DELETE Building
@@ -50,21 +48,25 @@ const Buildings = () => {
         deleteBuilding={deleteBuilding}
         editBuilding={editBuilding}
       />
-      {edit ? (
-        <div>
-          <EditBuilding
-            currentBuilding={currentBuilding}
-            setEdit={setEdit}
-            updateBuilding={updateBuilding}
-          />
-        </div>
-      ) : (
-        <div>
-          <AddBuilding addBuilding={addBuilding} />
-        </div>
-      )}
+      <div>
+        <AddBuilding postBuilding={postNewBuilding} building={building} />
+      </div>
     </div>
   );
 };
 
-export default Buildings;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      postBuilding: postBuildingAction,
+    },
+    dispatch
+  );
+
+const mapStateToProps = (state) => {
+  return {
+    buildings: state.buildings.list,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Buildings);

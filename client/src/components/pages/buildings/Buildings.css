@@ -55,6 +55,12 @@
   border: 3px solid #174157;
 }
 
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-edi,
 .btn-del {
   background-color: transparent;
