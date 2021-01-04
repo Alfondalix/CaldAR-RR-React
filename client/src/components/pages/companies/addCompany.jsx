@@ -10,9 +10,9 @@ import styles from './forms.module.css';
 const AddCompany = (props) => {
   const newCompany = {
     id: null,
-    name: '',
+    cuit: null,
     email: '',
-    address: '',
+    adress: '',
     buildings: [],
   };
 
@@ -21,16 +21,14 @@ const AddCompany = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCompany({ ...company, [name]: value });
+    setCompany({...company, [name]: value});
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (company.name && company.email && company.address && company.buildings) {
-      handleChange(e, props.addCompany(company));
-    }
-    setCompany(newCompany);
+    props.addCompany(company);
     setOpen(false);
+    setCompany(newCompany);
   };
 
   const handleOpen = () => {
@@ -50,11 +48,11 @@ const AddCompany = (props) => {
         <form className={styles.formModal}>
           <TextField
             id="outlined-basic"
-            label="NAME"
+            label="CUIT"
             variant="outlined"
             onChange={handleChange}
-            value={company.name}
-            name="name"
+            value={company.cuit}
+            name="cuit"
           />
           <TextField
             id="outlined-basic"
@@ -69,8 +67,8 @@ const AddCompany = (props) => {
             label="ADDRESS"
             variant="outlined"
             onChange={handleChange}
-            value={company.addres}
-            name="address"
+            value={company.adress}
+            name="adress"
           />
           <TextField
             id="outlined-basic"
