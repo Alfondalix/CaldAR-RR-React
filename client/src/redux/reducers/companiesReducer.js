@@ -52,9 +52,7 @@ const CompanyReducer = (state = initialState, action) => {
     case DELETE_COMPANY_FULFILLED:
       return {
         ...state,
-        list: state.list.filter(
-          (company) => company._id !== action.payload
-        ),
+        list: state.list.filter((company) => company._id !== action.payload),
       };
     case DELETE_COMPANY_REJECTED:
       return {

@@ -21,7 +21,7 @@ const AddCompany = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCompany({...company, [name]: value});
+    setCompany({ ...company, [name]: value });
   };
 
   const handleSubmit = (e) => {

@@ -22,7 +22,13 @@ import {
 
 import { bindActionCreators } from 'redux';
 
-const CompaniesTable = ({ companies, getCompanies, deleteCompany, updateCompany, addCompany }) => {
+const CompaniesTable = ({
+  companies,
+  getCompanies,
+  deleteCompany,
+  updateCompany,
+  addCompany,
+}) => {
   useEffect(() => {
     getCompanies();
   }, [getCompanies]);
@@ -47,34 +53,40 @@ const CompaniesTable = ({ companies, getCompanies, deleteCompany, updateCompany,
               <TableCell align="right">BUILDINGS</TableCell>
               <TableCell align="center">ACTIONS</TableCell>
               <TableCell align="center">
-                <AddCompany className={styles.button} addCompany={addNewCompany} />
+                <AddCompany
+                  className={styles.button}
+                  addCompany={addNewCompany}
+                />
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody className={styles.items}>
-            {companies && companies.map((company) => (
-              <TableRow key={company._id}>
-                <TableCell align="right">{company.cuit}</TableCell>
-                <TableCell align="right">{company.email}</TableCell>
-                <TableCell align="right">{company.adress}</TableCell>
-                <TableCell align="right">{company.buildings.length}</TableCell>
-                <TableCell align="center">
-                  <Button>
-                    <EditCompany
-                      currentCompany={company}
-                      updateCompany={updateCurCompany}
-                    />
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => deleteCompany(company._id)}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {companies &&
+              companies.map((company) => (
+                <TableRow key={company._id}>
+                  <TableCell align="right">{company.cuit}</TableCell>
+                  <TableCell align="right">{company.email}</TableCell>
+                  <TableCell align="right">{company.adress}</TableCell>
+                  <TableCell align="right">
+                    {company.buildings.length}
+                  </TableCell>
+                  <TableCell align="center">
+                    <Button>
+                      <EditCompany
+                        currentCompany={company}
+                        updateCompany={updateCurCompany}
+                      />
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => deleteCompany(company._id)}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

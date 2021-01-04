@@ -18,7 +18,7 @@ const EditCompany = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.updateCompany(comp)
+    props.updateCompany(comp);
     setOpen(false);
   };
 
