@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import styles from './boilerTypes.module.css';
+import { Form, Field } from 'react-final-form';
 
 const EditBoilerType = (props) => {
   const [boilerType, setBoilerType] = useState(props.currentBoilerType);
