@@ -10,13 +10,12 @@ import {
 import { bindActionCreators } from 'redux';
 import EditBoilerType from './EditBoilerType';
 
-
 const BoilerTypesList = ({boilertypes, getBoilerTypes, deleteBoilerTypes, updateBoilerTypes, addBoilerTypes}) => {
 
   useEffect(() => {
     getBoilerTypes();
   }, [getBoilerTypes]);
-  
+
   const addBoilerType = (boilertype) => {
     addBoilerTypes(boilertype);
   };
@@ -76,7 +75,6 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     boilertypes: state.BoilerTypes.list,
   };

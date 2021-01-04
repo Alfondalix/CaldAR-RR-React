@@ -19,9 +19,6 @@ const AddBoilertype = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*if (boilerType.name && boilerType.description) {
-      handleChange(e, props.addBoilerType(boilerType));
-    }*/
     props.addBoilerTypes(boilerType);
     setOpen(false);
     setBoilerType(newBoilerType);
