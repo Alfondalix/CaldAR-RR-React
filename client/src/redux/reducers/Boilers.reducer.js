@@ -66,7 +66,7 @@ const boilersReducer = (state = initialState, action) => {
       return {
         ...state,
         list: state.list.map((boiler) =>
-          boiler._id === action.payload ? (boiler = action.payload) : boiler
+          boiler._id === action.payload._id ? action.payload : boiler
         ),
       };
     case PUT_BOILERS_REJECTED:
