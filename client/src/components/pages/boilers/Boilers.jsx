@@ -6,7 +6,7 @@ import './Boilers.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { postBoiler as postBoilerB } from '../../../redux/actions/Boilers.actions';
+import { postBoiler as postBoilerAction } from '../../../redux/actions/Boilers.actions';
 
 const Boilers = ({ postBoiler }) => {
   const initialBoiler = {
@@ -14,21 +14,23 @@ const Boilers = ({ postBoiler }) => {
     idType: '',
     startTime: '',
     endTime: '',
-    monthlyHorus: '',
+    monthlyHours: '',
   };
 
   const postNewBoiler = (boiler) => {
     postBoiler(boiler);
   };
-  const [boiler, setBoilers] = useState(boilers);
+
+  const [boiler, setBoiler] = useState(boilers);
   const [currentBoiler, setCurrentBoiler] = useState(initialBoiler);
 
   // EDIT BOILER
   const editBoiler = (id, boiler) => {
     setCurrentBoiler(boiler);
   };
+
   const updateBoiler = (newBoiler) => {
-    setBoilers(
+    setBoiler(
       boilers.map((boiler) =>
         boiler.id === currentBoiler.id ? newBoiler : boiler
       )
@@ -37,7 +39,7 @@ const Boilers = ({ postBoiler }) => {
 
   //DELETE BOILER
   const deleteBoiler = (id) =>
-    setBoilers(boiler.filter((boiler) => boiler.id !== id));
+    setBoiler(boiler.filter((boiler) => boiler.id !== id));
 
   return (
     <div>
@@ -56,7 +58,7 @@ const Boilers = ({ postBoiler }) => {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      postBoiler: postBoilerB,
+      postBoiler: postBoilerAction,
     },
     dispatch
   );

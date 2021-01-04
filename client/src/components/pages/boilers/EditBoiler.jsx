@@ -14,6 +14,7 @@ const EditBoiler = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.putThBoiler(boiler);
+    console.log(boiler);
     setOpen(false);
   };
 
@@ -27,7 +28,7 @@ const EditBoiler = (props) => {
 
   return (
     <div className="edit-container">
-      <button className="add-btn" onClick={handleOpen}>
+      <button className="btn-edi" onClick={handleOpen}>
         <i class="far fa-edit"></i>
       </button>
       <Modal
@@ -46,19 +47,19 @@ const EditBoiler = (props) => {
           <input
             type="time"
             value={boiler.startTime}
-            name="Start Time"
+            name="startTime"
             onChange={handleChange}
           />
           <input
             type="time"
             value={boiler.endTime}
-            name="End Time"
+            name="endTime"
             onChange={handleChange}
           />
           <input
             type="number"
             value={boiler.monthlyHours}
-            name="Monthly Hours"
+            name="monthlyHours"
             onChange={handleChange}
           />
 

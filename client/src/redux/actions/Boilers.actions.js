@@ -13,7 +13,7 @@ import {
   DELETE_BOILERS_REJECTED,
 } from '../types/Boiler.types';
 
-const URL = 'http://localhost:5000/api/biolers';
+const URL = 'http://localhost:5000/api/boilers';
 
 const getBoilersPending = () => ({
   type: GET_BOILERS_PENDING,

@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import EditBoiler from './EditBoiler.jsx';
 
 import {
-  getBoilers as getBoilersB,
-  deleteBoiler as deleteBoilerB,
-  putBoiler as putBoilerB,
+  getBoilers as getBoilersAction,
+  deleteBoiler as deleteBoilerAction,
+  putBoiler as putBoilerAction,
 } from '../../../redux/actions/Boilers.actions';
 
 const BoilersTable = ({ boilers, getBoilers, putBoiler, deleteBoiler }) => {
@@ -28,7 +28,7 @@ const BoilersTable = ({ boilers, getBoilers, putBoiler, deleteBoiler }) => {
             <th>Type ID Boiler</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Montlhy Hours</th>
+            <th>Monthly Hours</th>
             <th></th>
           </tr>
         </thead>
@@ -47,6 +47,7 @@ const BoilersTable = ({ boilers, getBoilers, putBoiler, deleteBoiler }) => {
                     putThBoiler={putThisBoiler}
                     className="btn-edi"
                   />
+
                   <button
                     className="btn-edi"
                     onClick={() => deleteBoiler(boiler._id)}
@@ -65,14 +66,17 @@ const BoilersTable = ({ boilers, getBoilers, putBoiler, deleteBoiler }) => {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getBoilers: getBoilersB,
-      deleteBoiler: deleteBoilerB,
-      putBoiler: putBoilerB,
+      getBoilers: getBoilersAction,
+      deleteBoiler: deleteBoilerAction,
+      putBoiler: putBoilerAction,
     },
     dispatch
   );
-const mapStateToProps = (state) => ({
-  boilers: state.boilers.list,
-});
+
+const mapStateToProps = (state) => {
+  return {
+    boilers: state.boilers.list,
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoilersTable);

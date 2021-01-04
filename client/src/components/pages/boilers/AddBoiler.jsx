@@ -37,10 +37,10 @@ const AddBoiler = (props) => {
       <button className="add-btn" type="button" onClick={handleOpen}>
         <i class="fas fa-plus-circle"></i>
       </button>
-      <div className="edit-container">
+      <div>
         <Modal
           open={open}
-          onClose={(handleClose, handleSubmit)}
+          onClose={(handleSubmit, handleClose)}
           aria-labelledby="Add Boiler"
           className="modal"
         >
@@ -73,7 +73,7 @@ const AddBoiler = (props) => {
               className="u-full-width"
               type="number"
               name="monthlyHours"
-              placeholder="enter total amount of hours"
+              placeholder="Monthly Hours"
               value={boiler.monthlyHours}
               onChange={handleChange}
             />
