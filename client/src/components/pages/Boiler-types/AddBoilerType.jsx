@@ -55,6 +55,7 @@ const AddBoilertype = (props) => {
               placeholder="Name..."
               value={boilerType.name}
               onChange={handleChange}
+              required="true"
             />
             <input
               className="u-full-width"
