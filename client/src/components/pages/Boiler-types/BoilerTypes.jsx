@@ -9,7 +9,7 @@ import {
 } from '../../../redux/actions/boilerTypesActions';
 
 
-const BoilerTypes = (boilertypes, addBoilerTypes) => {
+const BoilerTypes = ({boilertypes, addBoilerTypes}) => {
   const initialBoilerType = {
     id: null,
     name: '',
