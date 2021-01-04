@@ -1,21 +1,29 @@
+import { connect } from 'react-redux';
 import React, { useState } from 'react';
-import boilerTypesData from './boilertypesData.json';
+
+import { bindActionCreators } from 'redux';
 import BoilerTypesList from './BoilerTypesList';
 import AddBoilerType from './AddBoilerType';
-import EditBoilerType from './EditBoilerType';
+import {
+  addBoilerTypes as addBoilerTypesAction,
+} from '../../../redux/actions/boilerTypesActions';
 
-const BoilerTypes = () => {
+
+const BoilerTypes = (boilertypes, addBoilerTypes) => {
   const initialBoilerType = {
     id: null,
     name: '',
     description: '',
   };
 
-  const [boilerType, setBoilerType] = useState(boilerTypesData);
-  const [edit, setEdit] = useState(false);
-  const [currentBoilerType, setCurrentBoilerType] = useState(initialBoilerType);
+  const addNewBoilerTypes = (boilertype) => {
+    addBoilerTypes(boilertype);
+  };
 
-  // ADD Building
+  //const [edit, setEdit] = useState(false);
+  const [currentBoilerType, setCurrentBoilerType] = useState(initialBoilerType);
+  
+  /*// ADD Building
   const addBoilerType = (boilerTypePar) => {
     boilerTypePar.id = boilerType.length + 1;
     setBoilerType([...boilerType, boilerTypePar]);
@@ -34,35 +42,39 @@ const BoilerTypes = () => {
     );
     setEdit(false);
   };
-
+*/
   //DELETE Building
-  const deleteBoilerType = (id) =>
-    setBoilerType(boilerType.filter((boilerType) => boilerType.id !== id));
+  /*const deleteBoilerType = (id) =>
+    setBoilerType(boilerType.filter((boilerType) => boilerType.id !== id));*/
 
   return (
     <div>
       <div className="list">
         <BoilerTypesList
-          boilerTypesData={boilerType}
+          /*boilerTypesData={boilerType}
           deleteBoilerType={deleteBoilerType}
-          editBoilerType={editBoilerType}
+          editBoilerType={editBoilerType}*/
         />
       </div>
-      {edit ? (
-        <div>
-          <EditBoilerType
-            currentBoilerType={currentBoilerType}
-            setEdit={setEdit}
-            updateBoilerType={updateBoilerType}
-          />
-        </div>
-      ) : (
-        <div>
-          <AddBoilerType addBoilerType={addBoilerType} />
-        </div>
-      )}
+      <div>
+        <AddBoilerType addBoilerTypes = {addNewBoilerTypes} boilertypes={boilertypes} />
+      </div>
     </div>
   );
 };
 
-export default BoilerTypes;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addBoilerTypes: addBoilerTypesAction,
+    },
+    dispatch
+  );
+};
+const mapStateToProps = (state) => {
+  return {
+    boilertypes: state.BoilerTypes.list,
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BoilerTypes);
+
