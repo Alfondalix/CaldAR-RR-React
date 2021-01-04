@@ -13,11 +13,10 @@ import {
   DELETE_BOILERS_REJECTED,
 } from '../types/Boiler.types';
 
-const URL = 'http://caldar-grupo7.herokuapp.com/api/boilers';
+const URL = 'http://localhost:5000/api/biolers';
 
 const getBoilersPending = () => ({
   type: GET_BOILERS_PENDING,
-  payload: {},
 });
 
 const getBoilersFulfilled = (payload) => ({
@@ -58,14 +57,15 @@ export const postBoiler = (boiler) => (dispatch) => {
   dispatch(postBoilerPending());
   return fetch(URL, {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(boiler),
   })
     .then((data) => data.json())
     .then((res) => {
       dispatch(postBoilerFulfilled(res));
     })
-    .catch(() => {
-      dispatch(postBoilerRejected());
+    .catch((err) => {
+      dispatch(postBoilerRejected(err));
     });
 };
 
@@ -82,12 +82,12 @@ const deleteBoilerRejected = () => ({
   type: DELETE_BOILERS_REJECTED,
 });
 
-export const deleteBoiler = (id) => (dispatch) => {
+export const deleteBoiler = (_id) => (dispatch) => {
   dispatch(deleteBoilerPending());
-  return fetch(URL + '/' + id, { method: 'DELETE' })
+  return fetch(`${URL}/${_id}`, { method: 'DELETE' })
     .then((data) => data.json())
     .then(() => {
-      dispatch(deleteBoilerFulfilled(id));
+      dispatch(deleteBoilerFulfilled(_id));
     })
     .catch(() => {
       dispatch(deleteBoilerRejected());
@@ -107,9 +107,11 @@ const putBoilerRejected = () => ({
 
 export const putBoiler = (newBoiler) => (dispatch) => {
   dispatch(putBoilerPending());
-  return fetch(URL + '/' + newBoiler._id, {
+  console.log(newBoiler);
+  return fetch(`${URL}/${newBoiler._id}`, {
     method: 'PUT',
-    body: JSON.stringify({ newBoiler }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newBoiler),
   })
     .then((data) => data.json())
     .then(() => {
