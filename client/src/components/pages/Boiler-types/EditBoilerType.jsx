@@ -13,7 +13,7 @@ const EditBoilerType = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.updateBoilerTypes(boilerType)
+    props.updateBoilerTypes(boilerType);
     setOpen(false);
   };
 

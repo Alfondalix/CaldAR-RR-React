@@ -10,8 +10,13 @@ import {
 import { bindActionCreators } from 'redux';
 import EditBoilerType from './EditBoilerType';
 
-const BoilerTypesList = ({boilertypes, getBoilerTypes, deleteBoilerTypes, updateBoilerTypes, addBoilerTypes}) => {
-
+const BoilerTypesList = ({
+  boilertypes,
+  getBoilerTypes,
+  deleteBoilerTypes,
+  updateBoilerTypes,
+  addBoilerTypes,
+}) => {
   useEffect(() => {
     getBoilerTypes();
   }, [getBoilerTypes]);
@@ -35,28 +40,29 @@ const BoilerTypesList = ({boilertypes, getBoilerTypes, deleteBoilerTypes, update
           </tr>
         </thead>
         <tbody>
-          {boilertypes && boilertypes.map((boilert) => (
-            <tr className={styles.tableRow} key={boilert._id}>
-              <td>{boilert._id}</td>
-              <td>{boilert.name}</td>
-              <td>{boilert.description}</td>
-              <td>
-                <EditBoilerType
-                  className={styles.btnEdit}
-                  currentBoilerType={boilert}
-                  updateBoilerTypes={updateCurBoilerTypes}
-                />
-              </td>
-              <td>
-                <button
-                  className={styles.btnDel}
-                  onClick={() => deleteBoilerTypes(boilert._id)}
-                >
-                  <i className="far fa-trash-alt btn-delete"></i>
-                </button>
-              </td>
-            </tr>
-          ))}
+          {boilertypes &&
+            boilertypes.map((boilert) => (
+              <tr className={styles.tableRow} key={boilert._id}>
+                <td>{boilert._id}</td>
+                <td>{boilert.name}</td>
+                <td>{boilert.description}</td>
+                <td>
+                  <EditBoilerType
+                    className={styles.btnEdit}
+                    currentBoilerType={boilert}
+                    updateBoilerTypes={updateCurBoilerTypes}
+                  />
+                </td>
+                <td>
+                  <button
+                    className={styles.btnDel}
+                    onClick={() => deleteBoilerTypes(boilert._id)}
+                  >
+                    <i className="far fa-trash-alt btn-delete"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
@@ -80,4 +86,3 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BoilerTypesList);
-

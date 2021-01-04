@@ -1,30 +1,30 @@
 [
-    {
-      "id": "1",
-      "idType": "A",
-      "startTime": "04:11",
-      "endTime": "06:32",
-      "monthlyHours": "12" 
-    },
-    {
-      "id": "2",
-      "idType": "B",
-      "startTime": "00:00",
-      "endTime": "02:00",
-      "monthlyHours": "120"
-    },
-    {
-      "id": "3",
-      "idType": "C",
-      "startTime": "08:00",
-      "endTime": "13:00",
-      "monthlyHours": "24"
-    },
-    {
-      "id": "4",
-      "idType": "D",
-      "startTime": "12:00",
-      "endTime": "13:00",
-      "monthlyHours": "220"
-    }
-  ]
+  {
+    "id": "1",
+    "idType": "A",
+    "startTime": "04:11",
+    "endTime": "06:32",
+    "monthlyHours": "12"
+  },
+  {
+    "id": "2",
+    "idType": "B",
+    "startTime": "00:00",
+    "endTime": "02:00",
+    "monthlyHours": "120"
+  },
+  {
+    "id": "3",
+    "idType": "C",
+    "startTime": "08:00",
+    "endTime": "13:00",
+    "monthlyHours": "24"
+  },
+  {
+    "id": "4",
+    "idType": "D",
+    "startTime": "12:00",
+    "endTime": "13:00",
+    "monthlyHours": "220"
+  }
+]

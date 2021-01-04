@@ -57,7 +57,7 @@ export const addCompany = (company) => (dispatch) => {
   dispatch(addCompanyFetching());
   return fetch(URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(company),
   })
     .then((data) => data.json())
@@ -107,11 +107,11 @@ const updateCompanyRejected = () => ({
   type: EDIT_COMPANY_REJECTED,
 });
 
-export const updateCompany = (newCompany) => dispatch => {
+export const updateCompany = (newCompany) => (dispatch) => {
   dispatch(updateCompanyFetching());
   return fetch(`${URL}/${newCompany._id}`, {
     method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newCompany),
   })
     .then((response) => response.json())

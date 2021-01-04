@@ -3,11 +3,9 @@ import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import BoilerTypesList from './BoilerTypesList';
 import AddBoilerType from './AddBoilerType';
-import {
-  addBoilerTypes as addBoilerTypesAction,
-} from '../../../redux/actions/boilerTypesActions';
+import { addBoilerTypes as addBoilerTypesAction } from '../../../redux/actions/boilerTypesActions';
 
-const BoilerTypes = ({boilertypes, addBoilerTypes}) => {
+const BoilerTypes = ({ boilertypes, addBoilerTypes }) => {
   const initialBoilerType = {
     id: null,
     name: '',
@@ -23,11 +21,13 @@ const BoilerTypes = ({boilertypes, addBoilerTypes}) => {
   return (
     <div>
       <div className="list">
-        <BoilerTypesList
-        />
+        <BoilerTypesList />
       </div>
       <div>
-        <AddBoilerType addBoilerTypes = {addNewBoilerTypes} boilertypes={boilertypes} />
+        <AddBoilerType
+          addBoilerTypes={addNewBoilerTypes}
+          boilertypes={boilertypes}
+        />
       </div>
     </div>
   );
@@ -47,4 +47,3 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BoilerTypes);
-

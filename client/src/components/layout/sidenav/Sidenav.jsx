@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import SideNav, {
-  NavItem,
-  NavIcon,
-  NavText,
-} from '@trendmicro/react-sidenav';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import { Link } from 'react-router-dom';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
