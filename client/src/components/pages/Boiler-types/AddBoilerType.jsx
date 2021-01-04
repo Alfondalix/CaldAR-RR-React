@@ -13,17 +13,18 @@ const AddBoilertype = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
-    console.log(e);
     const { name, value } = e.target;
     setBoilerType({ ...boilerType, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (boilerType.name && boilerType.description) {
+    /*if (boilerType.name && boilerType.description) {
       handleChange(e, props.addBoilerType(boilerType));
-    }
+    }*/
+    props.addBoilerTypes(boilerType);
     setOpen(false);
+    setBoilerType(newBoilerType);
   };
 
   const handleOpen = () => {

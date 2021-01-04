@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import BoilerTypesReducer from './boilerTypesReducer';
 
 const rootReducer = combineReducers({
-  // here come the reducers
+  BoilerTypes: BoilerTypesReducer
 });
 
 export default rootReducer;
