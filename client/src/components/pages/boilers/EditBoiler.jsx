@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
+import './Boilers.css';
 
 const EditBoiler = (props) => {
   const [boiler, setBoiler] = useState(props.currentBoiler);
@@ -12,9 +13,7 @@ const EditBoiler = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (boiler.idType) {
-      props.updateBoiler(boiler);
-    }
+    props.putThBoiler(boiler);
     setOpen(false);
   };
 
@@ -37,7 +36,7 @@ const EditBoiler = (props) => {
         aria-labelledby="Edit Boiler"
         className="modal"
       >
-        <form className="edit-form">
+        <form className="edit-form" onSubmit={handleSubmit}>
           <input
             type="text"
             value={boiler.idType}
@@ -66,7 +65,7 @@ const EditBoiler = (props) => {
           <button type="submit" onClick={handleSubmit}>
             Edit Boiler
           </button>
-          <button type="submit" onClick={() => props.setEdit(false)}>
+          <button type="submit" onClick={handleClose}>
             Cancel
           </button>
         </form>
