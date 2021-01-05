@@ -6,6 +6,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import styles from './forms.module.css';
+import { Form, Field } from 'react-final-form';
 
 const AddCompany = (props) => {
   const newCompany = {
