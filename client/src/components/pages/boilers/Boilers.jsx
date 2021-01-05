@@ -2,44 +2,44 @@ import React, { useState } from 'react';
 import boilers from './Boilers.json';
 import BoilersTable from './BoilersTable';
 import AddBoiler from './AddBoiler';
-import EditBoiler from './EditBoiler';
+import './Boilers.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-const Boilers = () => {
+import { postBoiler as postBoilerAction } from '../../../redux/actions/Boilers.actions';
+
+const Boilers = ({ postBoiler }) => {
   const initialBoiler = {
     id: null,
     idType: '',
     startTime: '',
     endTime: '',
-    monthlyHorus: '',
+    monthlyHours: '',
   };
 
-  const [boiler, setBoilers] = useState(boilers);
-  const [edit, setEdit] = useState(false);
+  const postNewBoiler = (boiler) => {
+    postBoiler(boiler);
+  };
+
+  const [boiler, setBoiler] = useState(boilers);
   const [currentBoiler, setCurrentBoiler] = useState(initialBoiler);
-
-  // ADD BOILER
-  const addBoiler = (boiler) => {
-    boiler.id = boilers.length + 1;
-    setBoilers([...boilers, boiler]);
-  };
 
   // EDIT BOILER
   const editBoiler = (id, boiler) => {
-    setEdit(true);
     setCurrentBoiler(boiler);
   };
+
   const updateBoiler = (newBoiler) => {
-    setBoilers(
+    setBoiler(
       boilers.map((boiler) =>
         boiler.id === currentBoiler.id ? newBoiler : boiler
       )
     );
-    setEdit(false);
   };
 
   //DELETE BOILER
   const deleteBoiler = (id) =>
-    setBoilers(boiler.filter((user) => user.id !== id));
+    setBoiler(boiler.filter((boiler) => boiler.id !== id));
 
   return (
     <div>
@@ -48,21 +48,25 @@ const Boilers = () => {
         deleteBoiler={deleteBoiler}
         editBoiler={editBoiler}
       />
-      {edit ? (
-        <div>
-          <EditBoiler
-            currentBoiler={currentBoiler}
-            setEdit={setEdit}
-            updateBoiler={updateBoiler}
-          />
-        </div>
-      ) : (
-        <div>
-          <AddBoiler addBoiler={addBoiler} />
-        </div>
-      )}
+      <div>
+        <AddBoiler postBoiler={postNewBoiler} boiler={boiler} />
+      </div>
     </div>
   );
 };
 
-export default Boilers;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      postBoiler: postBoilerAction,
+    },
+    dispatch
+  );
+
+const mapStateToProps = (state) => {
+  return {
+    boilers: state.boilers.list,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Boilers);

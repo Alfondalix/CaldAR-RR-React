@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
+import './Boilers.css';
 
 const EditBoiler = (props) => {
   const [boiler, setBoiler] = useState(props.currentBoiler);
@@ -12,9 +13,8 @@ const EditBoiler = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (boiler.idType) {
-      props.updateBoiler(boiler);
-    }
+    props.putThBoiler(boiler);
+    console.log(boiler);
     setOpen(false);
   };
 
@@ -27,14 +27,17 @@ const EditBoiler = (props) => {
   };
 
   return (
-    <>
-      <button onClick={handleOpen}>Edit Boilers</button>
+    <div className="edit-container">
+      <button className="btn-edi" onClick={handleOpen}>
+        <i class="far fa-edit"></i>
+      </button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
+        aria-labelledby="Edit Boiler"
+        className="modal"
       >
-        <form>
+        <form className="edit-form" onSubmit={handleSubmit}>
           <input
             type="text"
             value={boiler.idType}
@@ -56,19 +59,19 @@ const EditBoiler = (props) => {
           <input
             type="number"
             value={boiler.monthlyHours}
-            name="monthlyHorus"
+            name="monthlyHours"
             onChange={handleChange}
           />
 
           <button type="submit" onClick={handleSubmit}>
             Edit Boiler
           </button>
-          <button type="submit" onClick={() => props.setEditing(false)}>
+          <button type="submit" onClick={handleClose}>
             Cancel
           </button>
         </form>
       </Modal>
-    </>
+    </div>
   );
 };
 

@@ -20,14 +20,7 @@ const AddBoiler = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      boiler.idType &&
-      boiler.startTime &&
-      boiler.endTime &&
-      boiler.monthlyHours
-    ) {
-      handleChange(e, props.addBoiler(boiler));
-    }
+    props.postBoiler(boiler);
     setOpen(false);
   };
 
@@ -41,56 +34,59 @@ const AddBoiler = (props) => {
 
   return (
     <>
-      <button type="button" onClick={handleOpen}>
-        New Boilers
+      <button className="add-btn" type="button" onClick={handleOpen}>
+        <i class="fas fa-plus-circle"></i>
       </button>
-      <Modal
-        open={open}
-        onClose={(handleClose, handleSubmit)}
-        aria-labelledby="simple-modal-title"
-      >
-        <form>
-          <input
-            className="u-full-width"
-            type="text"
-            name="idType"
-            placeholder="please, enter ID type"
-            value={boiler.idType}
-            onChange={handleChange}
-          />
-          <input
-            className="u-full-width"
-            type="time"
-            name="startTime"
-            placeholder="enter inicial hour"
-            value={boiler.startTime}
-            onChange={handleChange}
-          />
-          <input
-            className="u-full-width"
-            type="time"
-            name="endTime"
-            placeholder="Enter finish hour"
-            value={boiler.endTime}
-            onChange={handleChange}
-          />
-          <input
-            className="u-full-width"
-            type="number"
-            name="monthlyHours"
-            placeholder="enter total amount of hours"
-            value={boiler.monthlyHours}
-            onChange={handleChange}
-          />
-          <button
-            className="button-primary"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Add new Boiler
-          </button>
-        </form>
-      </Modal>
+      <div>
+        <Modal
+          open={open}
+          onClose={(handleSubmit, handleClose)}
+          aria-labelledby="Add Boiler"
+          className="modal"
+        >
+          <form action="Submit" className="edit-form">
+            <input
+              className="u-full-width"
+              type="text"
+              name="idType"
+              placeholder="please, enter ID type"
+              value={boiler.idType}
+              onChange={handleChange}
+            />
+            <input
+              className="u-full-width"
+              type="time"
+              name="startTime"
+              placeholder="enter initial hour"
+              value={boiler.startTime}
+              onChange={handleChange}
+            />
+            <input
+              className="u-full-width"
+              type="time"
+              name="endTime"
+              placeholder="Enter finish hour"
+              value={boiler.endTime}
+              onChange={handleChange}
+            />
+            <input
+              className="u-full-width"
+              type="number"
+              name="monthlyHours"
+              placeholder="Monthly Hours"
+              value={boiler.monthlyHours}
+              onChange={handleChange}
+            />
+            <button
+              className="button-primary"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Add new Boiler
+            </button>
+          </form>
+        </Modal>
+      </div>
     </>
   );
 };

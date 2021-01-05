@@ -1,41 +1,82 @@
-import React from 'react';
-import styles from './BoilersTable.module.css';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import EditBoiler from './EditBoiler.jsx';
 
-const BoilersTable = (props) => {
+import {
+  getBoilers as getBoilersAction,
+  deleteBoiler as deleteBoilerAction,
+  putBoiler as putBoilerAction,
+} from '../../../redux/actions/Boilers.actions';
+
+const BoilersTable = ({ boilers, getBoilers, putBoiler, deleteBoiler }) => {
+  useEffect(() => {
+    getBoilers();
+  }, [getBoilers]);
+
+  const putThisBoiler = (boiler) => {
+    putBoiler(boiler);
+  };
+
   return (
-    <table className={styles.container}>
-      <thead className={styles.table}>
-        <tr className={styles.table}>
-          <th>ID</th>
-          <th>Type ID Boiler</th>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>Montlhy Hours</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.boiler.map((boiler) => (
-          <tr key={boiler.id}>
-            <td>{boiler.id}</td>
-            <td>{boiler.idType}</td>
-            <td>{boiler.startTime}</td>
-            <td>{boiler.endTime}</td>
-            <td>{boiler.monthlyHours}</td>
-            <td>
-              <button onClick={() => props.editBoiler(boiler.id, boiler)}>
-                Update
-              </button>
-            </td>
-            <td>
-              <button onClick={() => props.deleteBoiler(boiler.id)}>
-                Delete
-              </button>
-            </td>
+    <div className="table-container">
+      <table className="boilers-table">
+        <thead>
+          <tr className="table-titles">
+            <th></th>
+            <th>ID</th>
+            <th>Type ID Boiler</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Monthly Hours</th>
+            <th></th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="table-body">
+          {boilers &&
+            boilers.map((boiler) => (
+              <tr className="table-row" key={boiler._id}>
+                <td>{boiler._id}</td>
+                <td>{boiler.idType}</td>
+                <td>{boiler.startTime}</td>
+                <td>{boiler.endTime}</td>
+                <td>{boiler.monthlyHours}</td>
+                <td>
+                  <EditBoiler
+                    currentBoiler={boiler}
+                    putThBoiler={putThisBoiler}
+                    className="btn-edi"
+                  />
+
+                  <button
+                    className="btn-edi"
+                    onClick={() => deleteBoiler(boiler._id)}
+                  >
+                    <i className="far fa-trash-alt btn-delete"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
-export default BoilersTable;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getBoilers: getBoilersAction,
+      deleteBoiler: deleteBoilerAction,
+      putBoiler: putBoilerAction,
+    },
+    dispatch
+  );
+
+const mapStateToProps = (state) => {
+  return {
+    boilers: state.boilers.list,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoilersTable);
