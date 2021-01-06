@@ -28,7 +28,7 @@
 }
 
 .edit-form input {
-  margin: 10px 0px;
+  margin: 15px 0px;
   padding: 5px;
   font-size: 20px;
 }
@@ -81,4 +81,13 @@
 .btn-edi:hover {
   color: gray;
   cursor: pointer;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-input {
+  color: #f8f8f8;
 }

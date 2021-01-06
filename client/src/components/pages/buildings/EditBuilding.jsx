@@ -12,11 +12,17 @@ const EditBuilding = (props) => {
     setBuilding({ ...building, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     props.putCBuilding(building);
-    console.log(building);
     setOpen(false);
+  };
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const onSubmit = async (values, e) => {
+    await sleep(300);
+    console.log(building);
+    handleSubmit();
   };
 
   const handleOpen = () => {
@@ -38,39 +44,71 @@ const EditBuilding = (props) => {
         aria-labelledby="Edit Building"
         className="modal"
       >
-        <form className="edit-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={building.fullName}
-            name="fullName"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            value={building.address}
-            name="address"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            value={building.boilers}
-            name="boilers"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            value={building.phoneNumber}
-            name="phoneNumber"
-            onChange={handleChange}
-          />
-
-          <button type="submit" onClick={handleSubmit}>
-            Edit Building
-          </button>
-          <button type="submit" onClick={handleClose}>
-            Cancel
-          </button>
-        </form>
+        <Form
+          onSubmit={onSubmit}
+          render={({ handleSubmit, values, submitting }) => (
+            <form className="edit-form" onChange={handleChange}>
+              <Field name="fullName" value={building.fullName}>
+                {({ input }) => (
+                  <div className="input-container">
+                    <input
+                      {...input}
+                      className="u-full-width"
+                      type="text"
+                      placeholder="Name..."
+                      value={building.fullName}
+                    />
+                  </div>
+                )}
+              </Field>
+              <Field name="address" value={building.address}>
+                {({ input }) => (
+                  <div className="input-container">
+                    <input
+                      {...input}
+                      className="u-full-width"
+                      type="text"
+                      placeholder="Address..."
+                      value={building.address}
+                    />
+                  </div>
+                )}
+              </Field>
+              <Field name="boilers" value={building.boilers}>
+                {({ input }) => (
+                  <div className="input-container">
+                    <input
+                      {...input}
+                      className="u-full-width"
+                      type="text"
+                      placeholder="boilers..."
+                      value={building.boilers}
+                    />
+                  </div>
+                )}
+              </Field>
+              <Field name="phoneNumber" value={building.phoneNumber}>
+                {({ input }) => (
+                  <div className="input-container">
+                    <input
+                      {...input}
+                      className="u-full-width"
+                      type="text"
+                      placeholder="Phone Number..."
+                      value={building.phoneNumber}
+                    />
+                  </div>
+                )}
+              </Field>
+              <button type="submit" onClick={handleSubmit}>
+                Edit Building
+              </button>
+              <button type="submit" onClick={handleClose}>
+                Cancel
+              </button>
+            </form>
+          )}
+        />
       </Modal>
     </div>
   );
