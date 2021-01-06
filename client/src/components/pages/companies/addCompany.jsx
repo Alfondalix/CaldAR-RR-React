@@ -58,7 +58,7 @@ const AddCompany = (props) => {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Form
-        onSubmit={onSubmit}
+          onSubmit={onSubmit}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.formModal} onChange={handleChange}>
               <Field name="cuit" validate={required} value={company.cuit}>
@@ -71,7 +71,9 @@ const AddCompany = (props) => {
                       {...input}
                       // name="cuit"
                     />
-                    {meta.error && meta.touched && <span className={styles.error}>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className={styles.error}>{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -86,7 +88,9 @@ const AddCompany = (props) => {
                       {...input}
                       name="email"
                     />
-                    {meta.error && meta.touched && <span className={styles.error}>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className={styles.error}>{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
@@ -100,9 +104,11 @@ const AddCompany = (props) => {
                       onChange={handleChange}
                       value={company.adress}
                       {...input}
-                      name="adress"
+                      // name="adress"
                     />
-                    {meta.error && meta.touched && <span className={styles.error}>{meta.error}</span>}
+                    {meta.error && meta.touched && (
+                      <span className={styles.error}>{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
