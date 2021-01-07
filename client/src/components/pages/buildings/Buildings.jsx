@@ -38,7 +38,7 @@ const Buildings = ({ postBuilding }) => {
   };
 
   return (
-    <div className="buildings-div">
+    <div>
       <BuildingTable editBuilding={editBuilding} />
       <div>
         <AddBuilding postBuilding={postNewBuilding} building={building} />
