@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { Form, Field } from 'react-final-form';
 import './Buildings.css';
+import {
+  required,
+  addressValid,
+  nameValid,
+  phoneValid,
+  composeValidators,
+} from '../../utils/validations.js';
 
 const EditBuilding = (props) => {
   const [building, setBuilding] = useState(props.currentBuilding);
@@ -46,10 +53,15 @@ const EditBuilding = (props) => {
       >
         <Form
           onSubmit={onSubmit}
+          initialValues={props.currentBuilding}
           render={({ handleSubmit, values, submitting }) => (
             <form className="edit-form" onChange={handleChange}>
-              <Field name="fullName" value={building.fullName}>
-                {({ input }) => (
+              <Field
+                name="fullName"
+                value={building.fullName}
+                validate={composeValidators(required, nameValid)}
+              >
+                {({ input, meta }) => (
                   <div className="input-container">
                     <input
                       {...input}
@@ -58,11 +70,18 @@ const EditBuilding = (props) => {
                       placeholder="Name..."
                       value={building.fullName}
                     />
+                    {meta.error && meta.touched && (
+                      <span className="error-input">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
-              <Field name="address" value={building.address}>
-                {({ input }) => (
+              <Field
+                name="address"
+                value={building.address}
+                validate={composeValidators(required, addressValid)}
+              >
+                {({ input, meta }) => (
                   <div className="input-container">
                     <input
                       {...input}
@@ -71,11 +90,14 @@ const EditBuilding = (props) => {
                       placeholder="Address..."
                       value={building.address}
                     />
+                    {meta.error && meta.touched && (
+                      <span className="error-input">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
               <Field name="boilers" value={building.boilers}>
-                {({ input }) => (
+                {({ input, meta }) => (
                   <div className="input-container">
                     <input
                       {...input}
@@ -84,11 +106,18 @@ const EditBuilding = (props) => {
                       placeholder="boilers..."
                       value={building.boilers}
                     />
+                    {meta.error && meta.touched && (
+                      <span className="error-input">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
-              <Field name="phoneNumber" value={building.phoneNumber}>
-                {({ input }) => (
+              <Field
+                name="phoneNumber"
+                value={building.phoneNumber}
+                validate={composeValidators(required, phoneValid)}
+              >
+                {({ input, meta }) => (
                   <div className="input-container">
                     <input
                       {...input}
@@ -97,6 +126,9 @@ const EditBuilding = (props) => {
                       placeholder="Phone Number..."
                       value={building.phoneNumber}
                     />
+                    {meta.error && meta.touched && (
+                      <span className="error-input">{meta.error}</span>
+                    )}
                   </div>
                 )}
               </Field>
