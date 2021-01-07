@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { Form, Field } from 'react-final-form';
+import {
+  required,
+  addressValid,
+  nameValid,
+  phoneValid,
+  composeValidators,
+} from '../../utils/validations.js';
 
 const AddBuilding = (props) => {
   const newBuilding = {
@@ -17,11 +24,9 @@ const AddBuilding = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBuilding({ ...building, [name]: value });
-    console.log(building);
   };
 
   const handleSubmit = () => {
-    // e.preventDefault();
     props.postBuilding(building);
     setBuilding(newBuilding);
     setOpen(false);
@@ -35,13 +40,10 @@ const AddBuilding = (props) => {
     setOpen(false);
   };
 
-  const required = (value) => (value ? undefined : 'Required');
-
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const onSubmit = async (values, e) => {
     await sleep(300);
-    console.log(building);
     handleSubmit();
   };
 
@@ -64,7 +66,7 @@ const AddBuilding = (props) => {
                 <Field
                   name="fullName"
                   value={building.fullName}
-                  validate={required}
+                  validate={composeValidators(required, nameValid)}
                 >
                   {({ input, meta }) => (
                     <div className="input-container">
@@ -83,7 +85,7 @@ const AddBuilding = (props) => {
                 <Field
                   name="address"
                   value={building.address}
-                  validate={required}
+                  validate={composeValidators(required, addressValid)}
                 >
                   {({ input, meta }) => (
                     <div className="input-container">
@@ -121,7 +123,7 @@ const AddBuilding = (props) => {
                 <Field
                   name="phoneNumber"
                   value={building.phoneNumber}
-                  validate={required}
+                  validate={composeValidators(required, phoneValid)}
                 >
                   {({ input, meta }) => (
                     <div className="input-container">

@@ -37,17 +37,9 @@ const Buildings = ({ postBuilding }) => {
     );
   };
 
-  //DELETE Building
-  const deleteBuilding = (id) =>
-    setBuilding(building.filter((building) => building.id !== id));
-
   return (
     <div className="buildings-div">
-      <BuildingTable
-        building={building}
-        deleteBuilding={deleteBuilding}
-        editBuilding={editBuilding}
-      />
+      <BuildingTable editBuilding={editBuilding} />
       <div>
         <AddBuilding postBuilding={postNewBuilding} building={building} />
       </div>
