@@ -22,9 +22,7 @@ const EditCompany = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
     setInitialComp({ ...initialComp, [name]: value });
-    console.log(initialComp);
   };
 
   const handleSubmit = (e) => {
