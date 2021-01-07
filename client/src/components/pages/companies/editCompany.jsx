@@ -16,20 +16,18 @@ import {
 } from '../../utils/validations';
 
 const EditCompany = (props) => {
-  // const [comp, setCompany] = useState(props.currentCompany);
   const comp = props.currentCompany;
   const [open, setOpen] = useState(false);
   const [initialComp, setInitialComp] = useState(props.currentCompany);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name)
+    console.log(name);
     setInitialComp({ ...initialComp, [name]: value });
-    console.log(initialComp)
+    console.log(initialComp);
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
     props.updateCompany(initialComp);
     setOpen(false);
   };
@@ -65,12 +63,10 @@ const EditCompany = (props) => {
         <Modal open={open} onClose={handleClose}>
           <Form
             onSubmit={onSubmit}
+            initialValues={initialComp}
             render={({ handleSubmit, form, submitting, values }) => (
               <form className={styles.formModal} onChange={handleChange}>
-                <Field
-                  validate={composeValidators(required, cuitValidator)}
-                  name="cuit"
-                >
+                <Field validate={composeValidators(required, cuitValidator)} name="cuit">
                   {({ input, meta }) => (
                     <div>
                       <TextField
