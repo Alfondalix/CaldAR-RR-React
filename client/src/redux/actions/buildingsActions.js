@@ -107,7 +107,6 @@ const putBuildingRejected = () => ({
 
 export const putBuilding = (newBuilding) => (dispatch) => {
   dispatch(putBuildingPending());
-  console.log(newBuilding);
   return fetch(`${URL}/${newBuilding._id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

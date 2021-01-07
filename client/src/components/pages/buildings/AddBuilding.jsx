@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
+import { Form, Field } from 'react-final-form';
+import {
+  required,
+  addressValid,
+  nameValid,
+  phoneValid,
+  composeValidators,
+} from '../../utils/validations.js';
 
 const AddBuilding = (props) => {
   const newBuilding = {
@@ -18,9 +26,9 @@ const AddBuilding = (props) => {
     setBuilding({ ...building, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     props.postBuilding(building);
+    setBuilding(newBuilding);
     setOpen(false);
   };
 
@@ -32,6 +40,13 @@ const AddBuilding = (props) => {
     setOpen(false);
   };
 
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const onSubmit = async (values, e) => {
+    await sleep(300);
+    handleSubmit();
+  };
+
   return (
     <>
       <button className="add-btn" type="button" onClick={handleOpen}>
@@ -40,51 +55,100 @@ const AddBuilding = (props) => {
       <div className="edit-container">
         <Modal
           open={open}
-          onClose={(handleSubmit, handleClose)}
+          onClose={handleClose}
           aria-labelledby="Add Building"
           className="modal"
         >
-          <form action="Submit" className="edit-form">
-            <input
-              className="u-full-width"
-              type="text"
-              name="fullName"
-              placeholder="Name..."
-              value={building.fullName}
-              onChange={handleChange}
-            />
-            <input
-              className="u-full-width"
-              type="text"
-              name="address"
-              placeholder="Address..."
-              value={building.address}
-              onChange={handleChange}
-            />
-            <input
-              className="u-full-width"
-              type="text"
-              name="boilers"
-              placeholder="Boilers..."
-              value={building.boilers}
-              onChange={handleChange}
-            />
-            <input
-              className="u-full-width"
-              type="text"
-              name="phoneNumber"
-              placeholder="Phone Number..."
-              value={building.phoneNumber}
-              onChange={handleChange}
-            />
-            <button
-              className="button-primary"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              Add building
-            </button>
-          </form>
+          <Form
+            onSubmit={onSubmit}
+            render={({ handleSubmit, values, submitting }) => (
+              <form className="edit-form" onChange={handleChange}>
+                <Field
+                  name="fullName"
+                  value={building.fullName}
+                  validate={composeValidators(required, nameValid)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input
+                        {...input}
+                        className="u-full-width"
+                        type="text"
+                        placeholder="Name..."
+                      />
+                      {meta.error && meta.touched && (
+                        <span className="error-input">{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field
+                  name="address"
+                  value={building.address}
+                  validate={composeValidators(required, addressValid)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input
+                        {...input}
+                        className="u-full-width"
+                        type="text"
+                        placeholder="Address..."
+                      />
+                      {meta.error && meta.touched && (
+                        <span className="error-input">{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field
+                  name="boilers"
+                  value={building.boilers}
+                  validate={required}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input
+                        {...input}
+                        className="u-full-width"
+                        type="text"
+                        placeholder="Boilers..."
+                      />
+                      {meta.error && meta.touched && (
+                        <span className="error-input">{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field
+                  name="phoneNumber"
+                  value={building.phoneNumber}
+                  validate={composeValidators(required, phoneValid)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input
+                        {...input}
+                        className="u-full-width"
+                        type="text"
+                        placeholder="Phone Number..."
+                      />
+                      {meta.error && meta.touched && (
+                        <span className="error-input">{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <button
+                  className="button-primary"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Add building
+                </button>
+              </form>
+            )}
+          />
         </Modal>
       </div>
     </>
