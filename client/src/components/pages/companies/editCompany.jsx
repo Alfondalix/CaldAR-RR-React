@@ -7,6 +7,13 @@ import Modal from '@material-ui/core/Modal';
 import styles from './forms.module.css';
 import EditIcon from '@material-ui/icons/Edit';
 import { Form, Field } from 'react-final-form';
+import {
+  required,
+  addressValidator,
+  emailValidator,
+  cuitValidator,
+  composeValidators,
+} from '../../utils/validations';
 
 const EditCompany = (props) => {
   // const [comp, setCompany] = useState(props.currentCompany);
@@ -16,7 +23,9 @@ const EditCompany = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name)
     setInitialComp({ ...initialComp, [name]: value });
+    console.log(initialComp)
   };
 
   const handleSubmit = (e) => {
@@ -25,7 +34,7 @@ const EditCompany = (props) => {
     setOpen(false);
   };
 
-  const handleOpen = () => {
+  const handleOpen = (e) => {
     setOpen(true);
   };
 
@@ -40,11 +49,6 @@ const EditCompany = (props) => {
     await sleep(300);
     handleSubmit();
   };
-
-  const required = (value) => (
-    (value ? undefined : 'Required');
-    console.log(value);
-  );
 
   return (
     <>
@@ -63,7 +67,10 @@ const EditCompany = (props) => {
             onSubmit={onSubmit}
             render={({ handleSubmit, form, submitting, values }) => (
               <form className={styles.formModal} onChange={handleChange}>
-                <Field value={initialComp.cuit} validate={required} name="cuit">
+                <Field
+                  validate={composeValidators(required, cuitValidator)}
+                  name="cuit"
+                >
                   {({ input, meta }) => (
                     <div>
                       <TextField
@@ -73,15 +80,14 @@ const EditCompany = (props) => {
                         variant="outlined"
                         value={initialComp.cuit}
                       />
-                      {meta.touched && (
+                      {meta.error && meta.touched && (
                         <span className={styles.error}>{meta.error}</span>
                       )}
                     </div>
                   )}
                 </Field>
                 <Field
-                  value={initialComp.email}
-                  validate={required}
+                  validate={composeValidators(required, emailValidator)}
                   name="email"
                 >
                   {({ input, meta }) => (
@@ -93,15 +99,14 @@ const EditCompany = (props) => {
                         variant="outlined"
                         value={initialComp.email}
                       />
-                      {meta.touched && (
+                      {meta.error && meta.touched && (
                         <span className={styles.error}>{meta.error}</span>
                       )}
                     </div>
                   )}
                 </Field>
                 <Field
-                  value={initialComp.adress}
-                  validate={required}
+                  validate={composeValidators(required, addressValidator)}
                   name="adress"
                 >
                   {({ input, meta }) => (
@@ -113,17 +118,13 @@ const EditCompany = (props) => {
                         variant="outlined"
                         value={initialComp.adress}
                       />
-                      {meta.touched && (
+                      {meta.error && meta.touched && (
                         <span className={styles.error}>{meta.error}</span>
                       )}
                     </div>
                   )}
                 </Field>
-                <Field
-                  value={initialComp.buildings}
-                  validate={required}
-                  name="buildings"
-                >
+                <Field validate={required} name="buildings">
                   {({ input, meta }) => (
                     <div>
                       <TextField
@@ -133,7 +134,7 @@ const EditCompany = (props) => {
                         variant="outlined"
                         value={initialComp.buildings}
                       />
-                      {meta.touched && (
+                      {meta.error && meta.touched && (
                         <span className={styles.error}>{meta.error}</span>
                       )}
                     </div>

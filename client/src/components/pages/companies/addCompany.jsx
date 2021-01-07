@@ -6,8 +6,14 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import styles from './forms.module.css';
-// import { render } from 'react-dom';
 import { Form, Field } from 'react-final-form';
+import {
+  required,
+  addressValidator,
+  emailValidator,
+  cuitValidator,
+  composeValidators,
+} from '../../utils/validations';
 
 const AddCompany = (props) => {
   const newCompany = {
@@ -27,7 +33,6 @@ const AddCompany = (props) => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
     props.addCompany(company);
     setOpen(false);
     setCompany(newCompany);
@@ -48,9 +53,6 @@ const AddCompany = (props) => {
     handleSubmit();
   };
 
-  const required = (value) => (value ? undefined : 'Required');
-  // const addressValidation = (value) => ()
-
   return (
     <div className={styles.container}>
       <Button variant="contained" color="primary" onClick={handleOpen}>
@@ -61,7 +63,11 @@ const AddCompany = (props) => {
           onSubmit={onSubmit}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form className={styles.formModal} onChange={handleChange}>
-              <Field name="cuit" validate={required} value={company.cuit}>
+              <Field
+                name="cuit"
+                validate={composeValidators(required, cuitValidator)}
+                value={company.cuit}
+              >
                 {({ input, meta }) => (
                   <div>
                     <TextField
@@ -69,7 +75,6 @@ const AddCompany = (props) => {
                       label="CUIT"
                       variant="outlined"
                       {...input}
-                      // name="cuit"
                     />
                     {meta.error && meta.touched && (
                       <span className={styles.error}>{meta.error}</span>
@@ -77,7 +82,10 @@ const AddCompany = (props) => {
                   </div>
                 )}
               </Field>
-              <Field name="email" validate={required}>
+              <Field
+                name="email"
+                validate={composeValidators(required, emailValidator)}
+              >
                 {({ input, meta }) => (
                   <div>
                     <TextField
@@ -94,7 +102,10 @@ const AddCompany = (props) => {
                   </div>
                 )}
               </Field>
-              <Field name="adress" validate={required}>
+              <Field
+                name="adress"
+                validate={composeValidators(required, addressValidator)}
+              >
                 {({ input, meta }) => (
                   <div>
                     <TextField
@@ -104,7 +115,6 @@ const AddCompany = (props) => {
                       onChange={handleChange}
                       value={company.adress}
                       {...input}
-                      // name="adress"
                     />
                     {meta.error && meta.touched && (
                       <span className={styles.error}>{meta.error}</span>
@@ -112,13 +122,23 @@ const AddCompany = (props) => {
                   </div>
                 )}
               </Field>
-              <TextField
-                id="outlined-basic"
-                label="BUILDINGS"
-                variant="outlined"
-                value={company.buildings}
-                name="buildings"
-              />
+              <Field name="buildings" validate={required}>
+                {({ input, meta }) => (
+                  <div>
+                    <TextField
+                      id="outlined-basic"
+                      label="BUILDINGS"
+                      variant="outlined"
+                      onChange={handleChange}
+                      value={company.buildings}
+                      {...input}
+                    />
+                    {meta.error && meta.touched && (
+                      <span className={styles.error}>{meta.error}</span>
+                    )}
+                  </div>
+                )}
+              </Field>
               <div>
                 <Button onClick={handleSubmit} disabled={submitting}>
                   <CheckCircleIcon />
