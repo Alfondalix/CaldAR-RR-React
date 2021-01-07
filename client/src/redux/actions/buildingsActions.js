@@ -84,8 +84,6 @@ const deleteBuildingRejected = () => ({
 
 export const deleteBuilding = (_id) => (dispatch) => {
   dispatch(deleteBuildingPending());
-  console.log(_id);
-
   return fetch(`${URL}/${_id}`, { method: 'DELETE' })
     .then((data) => data.json())
     .then(() => {
@@ -109,7 +107,6 @@ const putBuildingRejected = () => ({
 
 export const putBuilding = (newBuilding) => (dispatch) => {
   dispatch(putBuildingPending());
-  console.log(newBuilding);
   return fetch(`${URL}/${newBuilding._id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

@@ -28,7 +28,6 @@ const EditBuilding = (props) => {
 
   const onSubmit = async (values, e) => {
     await sleep(300);
-    console.log(building);
     handleSubmit();
   };
 
