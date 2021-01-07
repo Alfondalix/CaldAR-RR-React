@@ -6,28 +6,44 @@ import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import styles from './forms.module.css';
 import EditIcon from '@material-ui/icons/Edit';
+import { Form, Field } from 'react-final-form';
+import {
+  required,
+  addressValidator,
+  emailValidator,
+  cuitValidator,
+  composeValidators,
+} from '../../utils/validations';
 
 const EditCompany = (props) => {
-  const [comp, setCompany] = useState(props.currentCompany);
+  const comp = props.currentCompany;
   const [open, setOpen] = useState(false);
+  const [initialComp, setInitialComp] = useState(props.currentCompany);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCompany({ ...comp, [name]: value });
+    setInitialComp({ ...initialComp, [name]: value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    props.updateCompany(comp);
+    props.updateCompany(initialComp);
     setOpen(false);
   };
 
-  const handleOpen = () => {
+  const handleOpen = (e) => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setInitialComp(comp);
     setOpen(false);
+  };
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const onSubmit = async (values, e) => {
+    await sleep(300);
+    handleSubmit();
   };
 
   return (
@@ -43,48 +59,93 @@ const EditCompany = (props) => {
           <EditIcon />
         </Button>
         <Modal open={open} onClose={handleClose}>
-          <form className={styles.formModal}>
-            <TextField
-              id="outlined-basic"
-              label="CUIT"
-              variant="outlined"
-              onChange={handleChange}
-              value={comp.cuit}
-              name="cuit"
-            />
-            <TextField
-              id="outlined-basic"
-              label="EMAIL"
-              variant="outlined"
-              onChange={handleChange}
-              value={comp.email}
-              name="email"
-            />
-            <TextField
-              id="outlined-basic"
-              label="ADDRESS"
-              variant="outlined"
-              onChange={handleChange}
-              value={comp.adress}
-              name="adress"
-            />
-            <TextField
-              id="outlined-basic"
-              label="BUILDINGS"
-              variant="outlined"
-              onChange={handleChange}
-              value={comp.buildings}
-              name="buildings"
-            />
-            <div>
-              <Button onClick={handleSubmit}>
-                <CheckCircleIcon />
-              </Button>
-              <Button onClick={handleClose}>
-                <CancelIcon />
-              </Button>
-            </div>
-          </form>
+          <Form
+            onSubmit={onSubmit}
+            initialValues={initialComp}
+            render={({ handleSubmit, form, submitting, values }) => (
+              <form className={styles.formModal} onChange={handleChange}>
+                <Field validate={composeValidators(required, cuitValidator)} name="cuit">
+                  {({ input, meta }) => (
+                    <div>
+                      <TextField
+                        {...input}
+                        id="outlined-basic"
+                        label="CUIT"
+                        variant="outlined"
+                        value={initialComp.cuit}
+                      />
+                      {meta.error && meta.touched && (
+                        <span className={styles.error}>{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field
+                  validate={composeValidators(required, emailValidator)}
+                  name="email"
+                >
+                  {({ input, meta }) => (
+                    <div>
+                      <TextField
+                        {...input}
+                        id="outlined-basic"
+                        label="EMAIL"
+                        variant="outlined"
+                        value={initialComp.email}
+                      />
+                      {meta.error && meta.touched && (
+                        <span className={styles.error}>{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field
+                  validate={composeValidators(required, addressValidator)}
+                  name="adress"
+                >
+                  {({ input, meta }) => (
+                    <div>
+                      <TextField
+                        {...input}
+                        id="outlined-basic"
+                        label="ADRESS"
+                        variant="outlined"
+                        value={initialComp.adress}
+                      />
+                      {meta.error && meta.touched && (
+                        <span className={styles.error}>{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field validate={required} name="buildings">
+                  {({ input, meta }) => (
+                    <div>
+                      <TextField
+                        {...input}
+                        id="outlined-basic"
+                        label="BUILDINGS"
+                        variant="outlined"
+                        value={initialComp.buildings}
+                      />
+                      {meta.error && meta.touched && (
+                        <span className={styles.error}>{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+
+                <div>
+                  <Button onClick={handleSubmit} disabled={submitting}>
+                    <CheckCircleIcon />
+                  </Button>
+                  <Button onClick={handleClose}>
+                    <CancelIcon />
+                  </Button>
+                </div>
+              </form>
+            )}
+          />
         </Modal>
       </div>
     </>

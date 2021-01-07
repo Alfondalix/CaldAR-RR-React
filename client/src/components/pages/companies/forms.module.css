@@ -16,3 +16,11 @@
   background-color: white;
   margin: 25vh auto;
 }
+
+.error {
+  display: block;
+  margin-top: 10px;
+  color: red;
+  font-family: sans-serif;
+  font-size: 15px;
+}
