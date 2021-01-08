@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { Form, Field } from 'react-final-form';
+import {
+  required,
+  startTime,
+  endTime,
+  monthlyHours,
+  composeValidators,
+} from '../../utils/validations.js'
 
 const AddBoiler = (props) => {
   const newBoiler = {
@@ -20,7 +27,6 @@ const AddBoiler = (props) => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
     props.postBoiler(boiler);
     setBoiler(newBoiler);
     setOpen(false);
@@ -33,8 +39,6 @@ const AddBoiler = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const required = (value) => (value ? undefined : 'Required *');
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -59,19 +63,21 @@ const AddBoiler = (props) => {
             onSubmit={onSubmit}
             render={({ handleSubmit, values, submitting }) => (
               <form className="edit-form" onChange={handleChange}>
+
                 <label>Boiler ID Type</label>
-                <Field name="idType" value={boiler.idType} component="select">
-                  <option value=""></option>
+                <Field name="idType" value={boiler.idType} component="select" validate={required}>
+                  <option value="0"></option>
                   <option value="A">A</option>
                   <option value="B">B</option>
                   <option value="C">C</option>
                   <option value="D">D</option>
                 </Field>
+
                 <label>Start Time</label>
                 <Field
                   name="startTime"
                   value={boiler.startTime}
-                  validate={required}
+                  validate={composeValidators(required, startTime)}
                 >
                   {({ input, meta }) => (
                     <div className="input-container">
@@ -82,11 +88,12 @@ const AddBoiler = (props) => {
                     </div>
                   )}
                 </Field>
+
                 <label>End Time</label>
                 <Field
                   name="endTime"
                   value={boiler.endTime}
-                  validate={required}
+                  validate={composeValidators(required, endTime)}
                 >
                   {({ input, meta }) => (
                     <div className="input-container">
@@ -97,11 +104,12 @@ const AddBoiler = (props) => {
                     </div>
                   )}
                 </Field>
+
                 <label>Total amount of Hours</label>
                 <Field
                   name="monthlyHours"
                   value={boiler.monthlyHours}
-                  validate={required}
+                  validate={composeValidators(required, monthlyHours)}
                 >
                   {({ input, meta }) => (
                     <div className="input-container">
