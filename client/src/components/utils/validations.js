@@ -1,3 +1,4 @@
+const regex = /[A-Z]/;
 const addressRegex = /\w\s\d/;
 const emailValid = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 const cuitValid = /^(20|23|27|30|33)([0-9]{9}|-[0-9]{8}-[0-9]{1})$/g;
@@ -19,3 +20,7 @@ export const cuitValidator = (values) =>
   !values.match(cuitValid) ? 'Invalid Cuit' : undefined;
 export const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);
+export const nameValid = (value) =>
+    value && value.length == 1 && value.match(regex) ? undefined : 'Invalid name';
+export const descriptionValid = (value) =>
+    value && value.length > 0 ? undefined : 'Description cant be empty';

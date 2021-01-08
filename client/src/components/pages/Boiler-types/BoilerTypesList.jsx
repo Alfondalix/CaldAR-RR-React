@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import styles from './boilerTypes.module.css';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../../redux/actions/boilerTypesActions';
 import { bindActionCreators } from 'redux';
 import EditBoilerType from './EditBoilerType';
+import Modal from '@material-ui/core/Modal';
 
 const BoilerTypesList = ({
   boilertypes,
@@ -17,6 +18,9 @@ const BoilerTypesList = ({
   updateBoilerTypes,
   addBoilerTypes,
 }) => {
+  const [open, setOpen] = useState(false);
+  const [id, setId] = useState(null);
+
   useEffect(() => {
     getBoilerTypes();
   }, [getBoilerTypes]);
@@ -27,6 +31,14 @@ const BoilerTypesList = ({
 
   const updateCurBoilerTypes = (boilertype) => {
     updateBoilerTypes(boilertype);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -56,13 +68,33 @@ const BoilerTypesList = ({
                 <td>
                   <button
                     className={styles.btnDel}
-                    onClick={() => deleteBoilerTypes(boilert._id)}
+                    onClick={ () => { handleOpen(); setId(boilert._id) } }
                   >
                     <i className="far fa-trash-alt btn-delete"></i>
                   </button>
                 </td>
               </tr>
             ))}
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="Delete Boiler Type"
+            className="modal"
+          >
+            <div className="edit-form">
+              <button
+                onClick={() => {
+                  handleClose();
+                  deleteBoilerTypes(id);
+                }}
+              >
+                Confirm Delete
+              </button>
+              <button type="submit" onClick={handleClose}>
+                Cancel
+              </button>
+            </div>
+          </Modal>
         </tbody>
       </table>
     </div>
