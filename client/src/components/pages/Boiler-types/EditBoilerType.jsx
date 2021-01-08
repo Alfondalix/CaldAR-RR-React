@@ -4,7 +4,7 @@ import styles from './boilerTypes.module.css';
 import { Form, Field } from 'react-final-form';
 import {
   required,
-  nameValid,
+  nameBTValid,
   descriptionValid,
   composeValidators,
 } from '../../utils/validations.js';
@@ -54,7 +54,7 @@ const EditBoilerType = (props) => {
           initialValues={props.currentBoilerType}
           render={({ handleSubmit, values, submitting }) => (
             <form className={styles.editForm} onChange={handleChange}>
-              <Field name="name" value={boilerType.name} validate={composeValidators(required, nameValid)}>
+              <Field name="name" value={boilerType.name} validate={composeValidators(required, nameBTValid)}>
                 {({ input, meta }) => (
                   <div className="input-container">
                     <input

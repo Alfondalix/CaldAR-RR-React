@@ -4,7 +4,7 @@ import styles from './boilerTypes.module.css';
 import { Form, Field } from 'react-final-form';
 import {
   required,
-  nameValid,
+  nameBTValid,
   descriptionValid,
   composeValidators,
 } from '../../utils/validations.js';
@@ -64,7 +64,7 @@ const AddBoilertype = (props) => {
                 <Field
                   name="name"
                   value={boilerType.name}
-                  validate={composeValidators(required, nameValid)}
+                  validate={composeValidators(required, nameBTValid)}
                 >
                   {({ input, meta }) => (
                     <div className="input-container">

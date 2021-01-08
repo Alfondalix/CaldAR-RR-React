@@ -20,7 +20,7 @@ export const cuitValidator = (values) =>
   !values.match(cuitValid) ? 'Invalid Cuit' : undefined;
 export const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);
-export const nameValid = (value) =>
+export const nameBTValid = (value) =>
     value && value.length == 1 && value.match(regex) ? undefined : 'Invalid name';
 export const descriptionValid = (value) =>
     value && value.length > 0 ? undefined : 'Description cant be empty';
