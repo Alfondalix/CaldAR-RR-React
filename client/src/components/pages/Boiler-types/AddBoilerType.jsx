@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import styles from './boilerTypes.module.css';
+import { Form, Field } from 'react-final-form';
+import {
+  required,
+  nameBTValid,
+  descriptionValid,
+  composeValidators,
+} from '../../utils/validations.js';
 
 const AddBoilertype = (props) => {
   const newBoilerType = {
@@ -17,8 +24,7 @@ const AddBoilertype = (props) => {
     setBoilerType({ ...boilerType, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     props.addBoilerTypes(boilerType);
     setOpen(false);
     setBoilerType(newBoilerType);
@@ -32,6 +38,13 @@ const AddBoilertype = (props) => {
     setOpen(false);
   };
 
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const onSubmit = async (values, e) => {
+    await sleep(300);
+    handleSubmit();
+  };
+
   return (
     <>
       <button className={styles.addBtn} type="button" onClick={handleOpen}>
@@ -40,36 +53,62 @@ const AddBoilertype = (props) => {
       <div>
         <Modal
           open={open}
-          onClose={(handleClose, handleSubmit)}
+          onClose={handleClose}
           aria-labelledby="simple-modal-title"
           className={styles.modal}
         >
-          <form className={styles.editForm}>
-            <input
-              className="u-full-width"
-              type="text"
-              name="name"
-              placeholder="Name..."
-              value={boilerType.name}
-              onChange={handleChange}
-              required="true"
-            />
-            <input
-              className="u-full-width"
-              type="text"
-              name="description"
-              placeholder="Description..."
-              value={boilerType.description}
-              onChange={handleChange}
-            />
-            <button
-              className="button-primary"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              Add
-            </button>
-          </form>
+          <Form
+            onSubmit={onSubmit}
+            render={({ handleSubmit, values, submitting }) => (
+              <form className={styles.editForm} onChange={handleChange}>
+                <Field
+                  name="name"
+                  value={boilerType.name}
+                  validate={composeValidators(required, nameBTValid)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input
+                        {...input}
+                        className="u-full-width"
+                        type="text"
+                        placeholder="Name..."
+                      />
+                      {meta.error && meta.touched && (
+                        <span className={styles.error}>{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field
+                  name="description"
+                  value={boilerType.description}
+                  validate={composeValidators(required, descriptionValid)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input
+                        {...input}
+                        className="u-full-width"
+                        type="text"
+                        placeholder="Description..."
+                      />
+                      {meta.error && meta.touched && (
+                        <span className={styles.error}>{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <button
+                  className="button-primary"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Add Boiler Type
+                </button>
+              </form>
+            )}
+          />
         </Modal>
       </div>
     </>

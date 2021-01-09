@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import styles from './boilerTypes.module.css';
+import { Form, Field } from 'react-final-form';
+import {
+  required,
+  nameBTValid,
+  descriptionValid,
+  composeValidators,
+} from '../../utils/validations.js';
 
 const EditBoilerType = (props) => {
   const [boilerType, setBoilerType] = useState(props.currentBoilerType);
@@ -11,10 +18,16 @@ const EditBoilerType = (props) => {
     setBoilerType({ ...boilerType, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     props.updateBoilerTypes(boilerType);
     setOpen(false);
+  };
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const onSubmit = async (values, e) => {
+    await sleep(300);
+    handleSubmit();
   };
 
   const handleOpen = () => {
@@ -27,7 +40,7 @@ const EditBoilerType = (props) => {
 
   return (
     <>
-      <button onClick={handleOpen} className={styles.addBtn}>
+      <button onClick={handleOpen} className={styles.btnEdi}>
         <i class="far fa-edit"></i>
       </button>
       <Modal
@@ -36,26 +49,52 @@ const EditBoilerType = (props) => {
         aria-labelledby="simple-modal-title"
         className={styles.modal}
       >
-        <form className={styles.editForm}>
-          <input
-            type="text"
-            value={boilerType.name}
-            name="name"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            value={boilerType.description}
-            name="description"
-            onChange={handleChange}
-          />
-          <button type="submit" onClick={handleSubmit}>
-            Edit Boiler Type
-          </button>
-          <button type="submit" onClick={() => props.setEditing(false)}>
-            Cancel
-          </button>
-        </form>
+        <Form
+          onSubmit={onSubmit}
+          initialValues={props.currentBoilerType}
+          render={({ handleSubmit, values, submitting }) => (
+            <form className={styles.editForm} onChange={handleChange}>
+              <Field name="name" value={boilerType.name} validate={composeValidators(required, nameBTValid)}>
+                {({ input, meta }) => (
+                  <div className="input-container">
+                    <input
+                      {...input}
+                      className="u-full-width"
+                      type="text"
+                      placeholder="Name..."
+                      value={boilerType.name}
+                    />
+                    {meta.error && meta.touched && (
+                      <span className={styles.error}>{meta.error}</span>
+                    )}
+                  </div>
+                )}
+              </Field>
+              <Field name="description" value={boilerType.description} validate={composeValidators(required, descriptionValid)}>
+                {({ input, meta }) => (
+                  <div className="input-container">
+                    <input
+                      {...input}
+                      className="u-full-width"
+                      type="text"
+                      placeholder="Description..."
+                      value={boilerType.description}
+                    />
+                    {meta.error && meta.touched && (
+                      <span className={styles.error}>{meta.error}</span>
+                    )}
+                  </div>
+                )}
+              </Field>
+              <button type="submit" onClick={handleSubmit}>
+                Edit Boiler Type
+              </button>
+              <button type="submit" onClick={handleClose}>
+                Cancel
+              </button>
+            </form>
+          )}
+        />
       </Modal>
     </>
   );
