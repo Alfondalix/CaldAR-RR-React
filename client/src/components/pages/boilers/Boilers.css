@@ -1,3 +1,17 @@
+label {
+  color: #f8f8f8;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 17px;
+  text-shadow: 4px 4px 15px gray;
+  padding-top: 5px;
+}
+
+select {
+  width:  100%;
+  height: 35px;
+}
+
 .table-container {
   display: flex;
   width: 100%;
@@ -75,4 +89,15 @@
 .btn-edi:hover {
   color: gray;
   cursor: pointer;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-input {
+  color: #f8f8f8;
+  font-weight: bold;
+  text-shadow: 4px 4px 15px red;
 }

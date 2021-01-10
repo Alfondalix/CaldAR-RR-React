@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
+import { Form, Field } from 'react-final-form';
+import {
+  required,
+  startTime,
+  endTime,
+  monthlyHours,
+  composeValidators,
+} from '../../utils/validations.js'
 
 const AddBoiler = (props) => {
   const newBoiler = {
@@ -19,8 +27,8 @@ const AddBoiler = (props) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     props.postBoiler(boiler);
+    setBoiler(newBoiler);
     setOpen(false);
   };
 
@@ -32,6 +40,13 @@ const AddBoiler = (props) => {
     setOpen(false);
   };
 
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const onSubmit = async (values, e) => {
+    await sleep(300);
+    handleSubmit();
+  };
+
   return (
     <>
       <button className="add-btn" type="button" onClick={handleOpen}>
@@ -40,51 +55,86 @@ const AddBoiler = (props) => {
       <div>
         <Modal
           open={open}
-          onClose={(handleSubmit, handleClose)}
+          onClose={handleClose}
           aria-labelledby="Add Boiler"
           className="modal"
         >
-          <form action="Submit" className="edit-form">
-            <input
-              className="u-full-width"
-              type="text"
-              name="idType"
-              placeholder="please, enter ID type"
-              value={boiler.idType}
-              onChange={handleChange}
-            />
-            <input
-              className="u-full-width"
-              type="time"
-              name="startTime"
-              placeholder="enter initial hour"
-              value={boiler.startTime}
-              onChange={handleChange}
-            />
-            <input
-              className="u-full-width"
-              type="time"
-              name="endTime"
-              placeholder="Enter finish hour"
-              value={boiler.endTime}
-              onChange={handleChange}
-            />
-            <input
-              className="u-full-width"
-              type="number"
-              name="monthlyHours"
-              placeholder="Monthly Hours"
-              value={boiler.monthlyHours}
-              onChange={handleChange}
-            />
-            <button
-              className="button-primary"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              Add new Boiler
-            </button>
-          </form>
+          <Form
+            onSubmit={onSubmit}
+            render={({ handleSubmit, values, submitting }) => (
+              <form className="edit-form" onChange={handleChange}>
+
+                <label>Boiler ID Type</label>
+                <Field name="idType" value={boiler.idType} component="select" validate={required}>
+                  <option value="0"></option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </Field>
+
+                <label>Start Time</label>
+                <Field
+                  name="startTime"
+                  value={boiler.startTime}
+                  validate={composeValidators(required, startTime)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input {...input} className="u-full-width" type="time" />
+                      {meta.error && meta.touched && (
+                        <span className="error-input">{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+
+                <label>End Time</label>
+                <Field
+                  name="endTime"
+                  value={boiler.endTime}
+                  validate={composeValidators(required, endTime)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input {...input} className="u-full-width" type="time" />
+                      {meta.error && meta.touched && (
+                        <span className="error-input">{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+
+                <label>Total amount of Hours</label>
+                <Field
+                  name="monthlyHours"
+                  value={boiler.monthlyHours}
+                  validate={composeValidators(required, monthlyHours)}
+                >
+                  {({ input, meta }) => (
+                    <div className="input-container">
+                      <input
+                        {...input}
+                        className="u-full-width"
+                        type="number"
+                      />
+                      {meta.error && meta.touched && (
+                        <span className="error-input">{meta.error}</span>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <button
+                  className="button-primary"
+                  type="submit"
+                  onClick={handleSubmit}
+                  disabled={submitting}
+                >
+                  Add Boiler
+                </button>
+              </form>
+            )}
+          />
         </Modal>
       </div>
     </>
