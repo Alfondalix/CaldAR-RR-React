@@ -35,7 +35,9 @@ export const monthlyHours = (value) =>
   /[0-9]/.test(value) ? undefined : "Please, make sure it's a valid time";
 
 export const nameBTValid = (value) =>
-  value && value.length == 1 && value.match(regex) ? undefined : 'Invalid name';
+  value && value.length === 1 && value.match(regex)
+    ? undefined
+    : 'Invalid name';
 
 export const descriptionValid = (value) =>
   value && value.length > 0 ? undefined : 'Description cant be empty';
