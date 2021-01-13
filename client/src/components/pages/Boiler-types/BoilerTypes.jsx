@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import BoilerTypesList from './BoilerTypesList';
 import AddBoilerType from './AddBoilerType';
 import { addBoilerTypes as addBoilerTypesAction } from '../../../redux/actions/boilerTypesActions';
+import { StylesProvider } from '@material-ui/core';
+import styles from './boilerTypes.module.css';
 
 const BoilerTypes = ({ boilertypes, addBoilerTypes }) => {
   const initialBoilerType = {
@@ -20,10 +22,11 @@ const BoilerTypes = ({ boilertypes, addBoilerTypes }) => {
 
   return (
     <div>
-      <div className="list">
+      <h1 className= {styles.tittle}>Boiler Types</h1>
+      <div>
         <BoilerTypesList />
       </div>
-      <div>
+      <div className= {styles.addContainer}>
         <AddBoilerType
           addBoilerTypes={addNewBoilerTypes}
           boilertypes={boilertypes}
